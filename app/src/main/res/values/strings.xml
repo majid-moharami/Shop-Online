@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Digikala</string>
+    <string name="my_digikala">دیجی کالای من</string>
+    <string name="home">خانه</string>
+    <string name="grouping">دسته بندی ها</string>
+    <string name="shop_basket">سبد خرید</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
