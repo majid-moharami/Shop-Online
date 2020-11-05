@@ -1,6 +1,5 @@
-package com.example.digikala.view.activity;
+package com.example.digikala.ui.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -13,10 +12,10 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.digikala.R;
 import com.example.digikala.databinding.ActivitySingleFragmentBinding;
-import com.example.digikala.view.fragment.GroupingFragment;
-import com.example.digikala.view.fragment.HomeFragment;
-import com.example.digikala.view.fragment.MyDigikalaFragment;
-import com.example.digikala.view.fragment.ShoppingCartFragment;
+import com.example.digikala.ui.fragment.GroupingFragment;
+import com.example.digikala.ui.fragment.HomeFragment;
+import com.example.digikala.ui.fragment.MyDigikalaFragment;
+import com.example.digikala.ui.fragment.ShoppingCartFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {

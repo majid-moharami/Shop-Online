@@ -17,10 +17,10 @@ import java.util.List;
 public class ProductItemsDeserializer implements JsonDeserializer<List<Product>> {
     @Override
     public List<Product> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-        JsonObject object = json.getAsJsonObject();
+       // JsonObject object = json.getAsJsonObject();
+        JsonArray jsonArray = json.getAsJsonArray();
         List<Product> products = new ArrayList<>();
 
-        JsonArray jsonArray = object.getAsJsonArray();
         for (int i = 0; i <jsonArray.size() ; i++) {
             JsonObject productObject = jsonArray.get(i).getAsJsonObject();
 
@@ -35,7 +35,7 @@ public class ProductItemsDeserializer implements JsonDeserializer<List<Product>>
             List<ProductCategory> categoryList = new ArrayList<>();
             JsonArray category = productObject.get("categories").getAsJsonArray();
             for (int j = 0; j <category.size() ; j++) {
-                JsonObject categoryObject = category.get(i).getAsJsonObject();
+                JsonObject categoryObject = category.get(j).getAsJsonObject();
                 String catName = categoryObject.get("name").getAsString();
                 String catId = categoryObject.get("id").getAsString();
                 ProductCategory productCategory = new ProductCategory(catName , catId);
@@ -43,12 +43,12 @@ public class ProductItemsDeserializer implements JsonDeserializer<List<Product>>
             }
 
             List<ProductImage> imageList = new ArrayList<>();
-            JsonArray images = productObject.get("categories").getAsJsonArray();
+            JsonArray images = productObject.get("images").getAsJsonArray();
             for (int j = 0; j <images.size() ; j++) {
-                JsonObject imageObject = images.get(i).getAsJsonObject();
+                JsonObject imageObject = images.get(j).getAsJsonObject();
                 String url = imageObject.get("src").getAsString();
                 String imageName = imageObject.get("name").getAsString();
-                String imageId = imageObject.get("id").getAsString();
+                int imageId = imageObject.get("id").getAsInt();
                 ProductImage productImage = new ProductImage(url , imageName , imageId);
                 imageList.add(productImage);
             }

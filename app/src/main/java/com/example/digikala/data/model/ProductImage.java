@@ -3,9 +3,9 @@ package com.example.digikala.data.model;
 public class ProductImage {
     private String mImageURL;
     private String mName;
-    private String mId;
+    private int mId;
 
-    public ProductImage(String imageURL, String name, String id) {
+    public ProductImage(String imageURL, String name, int id) {
         mImageURL = imageURL;
         mName = name;
         mId = id;
@@ -27,11 +27,11 @@ public class ProductImage {
         mName = name;
     }
 
-    public String getId() {
+    public int getId() {
         return mId;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         mId = id;
     }
 }

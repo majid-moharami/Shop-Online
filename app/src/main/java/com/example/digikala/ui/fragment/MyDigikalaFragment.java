@@ -1,4 +1,4 @@
-package com.example.digikala.view.fragment;
+package com.example.digikala.ui.fragment;
 
 import android.os.Bundle;
 

@@ -1,20 +1,17 @@
-package com.example.digikala.view.fragment;
+package com.example.digikala.ui.fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.digikala.R;
 
-public class ShoppingCartFragment extends Fragment {
-
-
-    public static ShoppingCartFragment newInstance() {
-        ShoppingCartFragment fragment = new ShoppingCartFragment();
+public class GroupingFragment extends Fragment {
+    public static GroupingFragment newInstance() {
+        GroupingFragment fragment = new GroupingFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -23,13 +20,12 @@ public class ShoppingCartFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shopping_cart, container, false);
+        return inflater.inflate(R.layout.fragment_grouping, container, false);
     }
 }
