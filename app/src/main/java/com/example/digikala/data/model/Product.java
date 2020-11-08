@@ -50,7 +50,8 @@ public class Product {
     }
 
     public String getPrice() {
-        return mPrice;
+
+        return mPrice+" تومان ";
     }
 
     public void setPrice(String price) {

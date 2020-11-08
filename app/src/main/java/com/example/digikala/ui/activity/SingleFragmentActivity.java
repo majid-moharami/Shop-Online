@@ -46,28 +46,24 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
             new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment fragment = null;
                     switch (item.getItemId()){
                         case R.id.home_nav:
-                            getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.fragment_container , HomeFragment.newInstance() , FRAGMENT_TAG)
-                                    .commit();
+                            fragment = HomeFragment.newInstance();
                             break;
                         case R.id.grouping_nav:
-                            getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.fragment_container ,GroupingFragment.newInstance(), FRAGMENT_TAG)
-                                    .commit();
+                            fragment = GroupingFragment.newInstance();
                             break;
                         case R.id.basket_nav:
-                            getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.fragment_container ,ShoppingCartFragment.newInstance() , FRAGMENT_TAG)
-                                    .commit();
+                            fragment = ShoppingCartFragment.newInstance();
                             break;
                         case R.id.my_dijikala_nav:
-                            getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.fragment_container , MyDigikalaFragment.newInstance() , FRAGMENT_TAG)
-                                    .commit();
+                            fragment =  MyDigikalaFragment.newInstance();
                             break;
                     }
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container , fragment , FRAGMENT_TAG)
+                            .commit();
                     return true;
                 }
             };
