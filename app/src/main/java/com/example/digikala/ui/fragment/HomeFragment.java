@@ -41,7 +41,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(HomeFragmentViewModel.class);
+        mViewModel = new ViewModelProvider(requireActivity()).get(HomeFragmentViewModel.class);
         observers();
         setHasOptionsMenu(true);
 
@@ -119,6 +119,15 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(List<Product> products) {
                 setRatingProductAdapter(products);
+            }
+        });
+
+        mViewModel.getProductSelectedLiveData().observe(this, new Observer<Product>() {
+            @Override
+            public void onChanged(Product product) {
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container , ProductDetailFragment.newInstance())
+                        .commit();
             }
         });
     }

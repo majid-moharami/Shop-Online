@@ -47,11 +47,13 @@ public class HomeFragmentViewModel extends AndroidViewModel {
         return mRatingProductLiveData;
     }
 
-    @BindingAdapter("fetchImage")
-    public static void loadImage(ImageView view, String imageUrl) {
-        Glide.with(view.getContext())
-                .load(imageUrl).apply(new RequestOptions().circleCrop())
-                .into(view);
+    public MutableLiveData<Product> getProductSelectedLiveData() {
+        return mProductSelectedLiveData;
+    }
+
+    public void onItemSelectedRecentProduct(int position){
+       Product product = mRecentProductLiveData.getValue().get(position);
+       mProductSelectedLiveData.setValue(product);
     }
 
 }
