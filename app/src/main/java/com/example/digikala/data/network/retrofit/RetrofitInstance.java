@@ -24,6 +24,16 @@ public class RetrofitInstance {
         return retrofit;
     }
 
+    public static Retrofit getInstanceSingleProduct(){
+        Type type = new TypeToken<Product>(){}.getType();
+        Object typeAdapter = new SingleProductDeserializer();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(RequestParams.BASE_PATH_PRODUCT)
+                .addConverterFactory(createGsonConverter(type , typeAdapter))
+                .build();
+        return retrofit;
+    }
+
     public static Converter.Factory createGsonConverter(Type type , Object typeAdapter){
         GsonBuilder gsonBuilder = new GsonBuilder().registerTypeAdapter(type , typeAdapter);
         Gson gson = gsonBuilder.create();

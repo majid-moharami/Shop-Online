@@ -24,10 +24,12 @@ public class ProductRepository {
     private Context mContext;
     private WooCommerceService mCommerceService;
     private Retrofit retrofit = RetrofitInstance.getInstance();
+    private Retrofit retrofitSingleProduct = RetrofitInstance.getInstanceSingleProduct();
 
     private MutableLiveData<List<Product>> mRecentProductLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mPopularProductLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mRatingProductLiveData = new MutableLiveData<>();
+    private MutableLiveData<Product> mSingleProductLiveData = new MutableLiveData<>();
 
     public static ProductRepository getInstance(){
         if (sProductRepository == null)
@@ -88,6 +90,23 @@ public class ProductRepository {
         });
     }
 
+    public void fetchProduct(String id){
+        mCommerceService = retrofitSingleProduct.create(WooCommerceService.class);
+        Call<Product> productCall = mCommerceService.product(id , RequestParams.RECENT_PRODUCT);
+        productCall.enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(Call<Product> call, Response<Product> response) {
+                mSingleProductLiveData.setValue(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Product> call, Throwable t) {
+                Log.d("MAJID" , t.toString() , t);
+            }
+        });
+    }
+
+
     public MutableLiveData<List<Product>> getRecentProductLiveData() {
         return mRecentProductLiveData;
     }
@@ -98,5 +117,9 @@ public class ProductRepository {
 
     public MutableLiveData<List<Product>> getRatingProductLiveData() {
         return mRatingProductLiveData;
+    }
+
+    public MutableLiveData<Product> getSingleProductLiveData() {
+        return mSingleProductLiveData;
     }
 }

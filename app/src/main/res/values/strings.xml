@@ -10,4 +10,7 @@
     <string name="see_more"><![CDATA[مشاهده همه >]]></string>
     <string name="most_view">پر بازدیدترین ها</string>
     <string name="most_rate">بیشترین امتیاز</string>
+    <string name="about_product">درباره کالا</string>
+    <string name="add_to_basket">افزودن به سبد خرید</string>
+    <string name="toman">تومان</string>
 </resources>

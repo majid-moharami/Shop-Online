@@ -1,6 +1,5 @@
-package com.example.digikala.adapter;
+package com.example.digikala.adapter.Horizontaladapter;
 
-import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -13,18 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.digikala.R;
 import com.example.digikala.data.model.Product;
-import com.example.digikala.databinding.ProductItemListBinding;
+import com.example.digikala.databinding.ProductPopularListItemBinding;
 import com.example.digikala.viewmodel.HomeFragmentViewModel;
 
 import java.util.List;
 
-public class HorizontalRecentProductListAdapter extends RecyclerView.Adapter<HorizontalRecentProductListAdapter.ProductHolder> {
+public class HorizontalPopularProductListAdapter  extends RecyclerView.Adapter<HorizontalPopularProductListAdapter.PopularProductHolder> {
 
     private List<Product> mProductList;
     private HomeFragmentViewModel mViewModel;
     private LifecycleOwner mOwner ;
 
-    public HorizontalRecentProductListAdapter(LifecycleOwner owner , HomeFragmentViewModel viewModel) {
+    public HorizontalPopularProductListAdapter(LifecycleOwner owner , HomeFragmentViewModel viewModel) {
         mOwner = owner ;
         mViewModel = viewModel;
     }
@@ -39,31 +38,32 @@ public class HorizontalRecentProductListAdapter extends RecyclerView.Adapter<Hor
 
     @NonNull
     @Override
-    public ProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ProductItemListBinding itemListBinding = DataBindingUtil.inflate(
+    public HorizontalPopularProductListAdapter.PopularProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ProductPopularListItemBinding itemListBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(mViewModel.getApplication()),
-                R.layout.product_item_list,
+                R.layout.product_popular_list_item,
                 parent,
                 false
         );
-        return new ProductHolder(itemListBinding);
+        return new HorizontalPopularProductListAdapter.PopularProductHolder(itemListBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PopularProductHolder holder, int position) {
         holder.onBind(position);
     }
+
 
     @Override
     public int getItemCount() {
         return 5;
     }
 
-    class ProductHolder extends RecyclerView.ViewHolder{
-        private ProductItemListBinding mItemListBinding;
-        public ProductHolder(ProductItemListBinding productItemListBinding) {
-            super(productItemListBinding.getRoot());
-            mItemListBinding =productItemListBinding;
+    class PopularProductHolder extends RecyclerView.ViewHolder{
+        private ProductPopularListItemBinding mItemListBinding;
+        public PopularProductHolder(ProductPopularListItemBinding productPopularListItemBinding) {
+            super(productPopularListItemBinding.getRoot());
+            mItemListBinding =productPopularListItemBinding;
             mItemListBinding.setViewModel(mViewModel);
             mItemListBinding.setLifecycleOwner(mOwner);
             Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets() , "fonts/Dirooz-FD.ttf");
@@ -74,7 +74,7 @@ public class HorizontalRecentProductListAdapter extends RecyclerView.Adapter<Hor
         public void onBind(int position){
             mItemListBinding.setPosition(position);
             mItemListBinding.executePendingBindings();
-            String imageURL = mViewModel.getRecentProductLiveData().getValue().get(position).getImages().get(0).getImageURL();
+            String imageURL = mViewModel.getPopularProductLiveData().getValue().get(position).getImages().get(0).getImageURL();
             Glide.with(mViewModel.getApplication()).load(imageURL).into(mItemListBinding.imageViewProductImage);
 //            String imageURL = product.getImages().get(0).getImageURL();
 //            Glide.with(mContext).load(imageURL).into(mItemListBinding.imageViewProductImage);

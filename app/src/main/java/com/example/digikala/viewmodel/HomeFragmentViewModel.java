@@ -56,4 +56,14 @@ public class HomeFragmentViewModel extends AndroidViewModel {
        mProductSelectedLiveData.setValue(product);
     }
 
+    public void onItemSelectedRatingProduct(int position){
+        Product product = mRatingProductLiveData.getValue().get(position);
+        mProductSelectedLiveData.setValue(product);
+    }
+
+    public void onItemSelectedPopularProduct(int position){
+        Product product = mPopularProductLiveData.getValue().get(position);
+        mProductSelectedLiveData.setValue(product);
+    }
+
 }

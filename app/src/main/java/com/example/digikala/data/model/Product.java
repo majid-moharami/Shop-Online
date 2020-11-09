@@ -1,5 +1,6 @@
 package com.example.digikala.data.model;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class Product {
@@ -50,8 +51,14 @@ public class Product {
     }
 
     public String getPrice() {
+        String number = mPrice;
+        double amount = Double.parseDouble(number);
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        return formatter.format(amount);
+    }
 
-        return mPrice+" تومان ";
+    public String getPriceToman(){
+        return getPrice() + " تومان ";
     }
 
     public void setPrice(String price) {

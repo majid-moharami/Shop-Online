@@ -14,11 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.digikala.R;
-import com.example.digikala.adapter.HorizontalPopularProductListAdapter;
-import com.example.digikala.adapter.HorizontalRatingProductListAdapter;
-import com.example.digikala.adapter.HorizontalRecentProductListAdapter;
+import com.example.digikala.adapter.Horizontaladapter.HorizontalPopularProductListAdapter;
+import com.example.digikala.adapter.Horizontaladapter.HorizontalRatingProductListAdapter;
+import com.example.digikala.adapter.Horizontaladapter.HorizontalRecentProductListAdapter;
 import com.example.digikala.data.model.Product;
 import com.example.digikala.databinding.FragmentHomeBinding;
+import com.example.digikala.ui.activity.ProductDetailActivity;
+import com.example.digikala.ui.activity.SingleFragmentActivity;
 import com.example.digikala.viewmodel.HomeFragmentViewModel;
 
 import java.util.List;
@@ -125,9 +127,12 @@ public class HomeFragment extends Fragment {
         mViewModel.getProductSelectedLiveData().observe(this, new Observer<Product>() {
             @Override
             public void onChanged(Product product) {
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container , ProductDetailFragment.newInstance())
-                        .commit();
+                startActivity(ProductDetailActivity.newIntent(getContext() ,Integer.parseInt(product.getId())));
+//                getParentFragmentManager().beginTransaction()
+//                        .replace(R.id.fragment_container ,
+//                                ProductDetailFragment.newInstance(Integer.parseInt(product.getId())),
+//                                SingleFragmentActivity.FRAGMENT_TAG)
+//                        .commit();
             }
         });
     }

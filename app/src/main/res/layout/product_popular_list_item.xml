@@ -15,7 +15,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        android:onClick="@{()->viewModel.onItemSelectedPopularProduct(position)}">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/product_item"
@@ -61,7 +62,7 @@
                     android:textColor="#000000"
                     android:textSize="10sp"
                     android:textStyle="bold"
-                    android:text="@{viewModel.popularProductLiveData.get(position).price}"
+                    android:text="@{viewModel.popularProductLiveData.get(position).priceToman}"
                     tools:ignore="SmallSp"
                     tools:text="26000 تومان" />
             </LinearLayout>

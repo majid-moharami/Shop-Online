@@ -1,4 +1,4 @@
-package com.example.digikala.adapter;
+package com.example.digikala.adapter.Horizontaladapter;
 
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -12,19 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.digikala.R;
 import com.example.digikala.data.model.Product;
-import com.example.digikala.databinding.ProductRatingListItemBinding;
+import com.example.digikala.databinding.ProductItemListBinding;
 import com.example.digikala.viewmodel.HomeFragmentViewModel;
 
 import java.util.List;
 
-public class HorizontalRatingProductListAdapter extends RecyclerView.Adapter<HorizontalRatingProductListAdapter.RatingProductHolder> {
+public class HorizontalRecentProductListAdapter extends RecyclerView.Adapter<HorizontalRecentProductListAdapter.ProductHolder> {
 
     private List<Product> mProductList;
     private HomeFragmentViewModel mViewModel;
-    private LifecycleOwner mOwner;
+    private LifecycleOwner mOwner ;
 
-    public HorizontalRatingProductListAdapter(LifecycleOwner owner, HomeFragmentViewModel viewModel) {
-        mOwner = owner;
+    public HorizontalRecentProductListAdapter(LifecycleOwner owner , HomeFragmentViewModel viewModel) {
+        mOwner = owner ;
         mViewModel = viewModel;
     }
 
@@ -38,18 +38,18 @@ public class HorizontalRatingProductListAdapter extends RecyclerView.Adapter<Hor
 
     @NonNull
     @Override
-    public HorizontalRatingProductListAdapter.RatingProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ProductRatingListItemBinding itemListBinding = DataBindingUtil.inflate(
+    public ProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ProductItemListBinding itemListBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(mViewModel.getApplication()),
-                R.layout.product_rating_list_item,
+                R.layout.product_item_list,
                 parent,
                 false
         );
-        return new HorizontalRatingProductListAdapter.RatingProductHolder(itemListBinding);
+        return new ProductHolder(itemListBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RatingProductHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
         holder.onBind(position);
     }
 
@@ -58,24 +58,25 @@ public class HorizontalRatingProductListAdapter extends RecyclerView.Adapter<Hor
         return 5;
     }
 
-    class RatingProductHolder extends RecyclerView.ViewHolder {
-        private ProductRatingListItemBinding mItemListBinding;
-
-        public RatingProductHolder(ProductRatingListItemBinding productRatingListItemBinding) {
-            super(productRatingListItemBinding.getRoot());
-            mItemListBinding = productRatingListItemBinding;
+    class ProductHolder extends RecyclerView.ViewHolder{
+        private ProductItemListBinding mItemListBinding;
+        public ProductHolder(ProductItemListBinding productItemListBinding) {
+            super(productItemListBinding.getRoot());
+            mItemListBinding =productItemListBinding;
             mItemListBinding.setViewModel(mViewModel);
             mItemListBinding.setLifecycleOwner(mOwner);
-            Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets(), "fonts/Dirooz-FD.ttf");
+            Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets() , "fonts/Dirooz-FD.ttf");
             mItemListBinding.textViewProductName.setTypeface(typeFace);
             mItemListBinding.textViewProductPrice.setTypeface(typeFace);
         }
 
-        public void onBind(int position) {
+        public void onBind(int position){
             mItemListBinding.setPosition(position);
             mItemListBinding.executePendingBindings();
-            String imageURL = mViewModel.getRatingProductLiveData().getValue().get(position).getImages().get(0).getImageURL();
+            String imageURL = mViewModel.getRecentProductLiveData().getValue().get(position).getImages().get(0).getImageURL();
             Glide.with(mViewModel.getApplication()).load(imageURL).into(mItemListBinding.imageViewProductImage);
+//            String imageURL = product.getImages().get(0).getImageURL();
+//            Glide.with(mContext).load(imageURL).into(mItemListBinding.imageViewProductImage);
 //            mItemListBinding.textViewProductName.setText(product.getName());
 //            String number = product.getPrice();
 //            double amount = Double.parseDouble(number);

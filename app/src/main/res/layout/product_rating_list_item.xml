@@ -15,7 +15,8 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        android:onClick="@{()->viewModel.onItemSelectedRatingProduct(position)}">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/product_item"
@@ -49,7 +50,7 @@
                     android:textColor="#000000"
                     android:textSize="12sp"
                     tools:ignore="TextViewEdits"
-                    android:text="@{viewModel.popularProductLiveData.get(position).name}"
+                    android:text="@{viewModel.ratingProductLiveData.get(position).name}"
                     tools:text="تلوزیون 56 اینچ ایکویژن" />
 
                 <TextView
@@ -61,7 +62,7 @@
                     android:textColor="#000000"
                     android:textSize="10sp"
                     android:textStyle="bold"
-                    android:text="@{viewModel.popularProductLiveData.get(position).price}"
+                    android:text="@{viewModel.ratingProductLiveData.get(position).priceToman}"
                     tools:ignore="SmallSp"
                     tools:text="26000 تومان" />
             </LinearLayout>

@@ -1,4 +1,4 @@
-package com.example.digikala.adapter;
+package com.example.digikala.adapter.Horizontaladapter;
 
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -12,19 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.digikala.R;
 import com.example.digikala.data.model.Product;
-import com.example.digikala.databinding.ProductPopularListItemBinding;
+import com.example.digikala.databinding.ProductRatingListItemBinding;
 import com.example.digikala.viewmodel.HomeFragmentViewModel;
 
 import java.util.List;
 
-public class HorizontalPopularProductListAdapter  extends RecyclerView.Adapter<HorizontalPopularProductListAdapter.PopularProductHolder> {
+public class HorizontalRatingProductListAdapter extends RecyclerView.Adapter<HorizontalRatingProductListAdapter.RatingProductHolder> {
 
     private List<Product> mProductList;
     private HomeFragmentViewModel mViewModel;
-    private LifecycleOwner mOwner ;
+    private LifecycleOwner mOwner;
 
-    public HorizontalPopularProductListAdapter(LifecycleOwner owner , HomeFragmentViewModel viewModel) {
-        mOwner = owner ;
+    public HorizontalRatingProductListAdapter(LifecycleOwner owner, HomeFragmentViewModel viewModel) {
+        mOwner = owner;
         mViewModel = viewModel;
     }
 
@@ -38,46 +38,44 @@ public class HorizontalPopularProductListAdapter  extends RecyclerView.Adapter<H
 
     @NonNull
     @Override
-    public HorizontalPopularProductListAdapter.PopularProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ProductPopularListItemBinding itemListBinding = DataBindingUtil.inflate(
+    public HorizontalRatingProductListAdapter.RatingProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        ProductRatingListItemBinding itemListBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(mViewModel.getApplication()),
-                R.layout.product_popular_list_item,
+                R.layout.product_rating_list_item,
                 parent,
                 false
         );
-        return new HorizontalPopularProductListAdapter.PopularProductHolder(itemListBinding);
+        return new HorizontalRatingProductListAdapter.RatingProductHolder(itemListBinding);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PopularProductHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RatingProductHolder holder, int position) {
         holder.onBind(position);
     }
-
 
     @Override
     public int getItemCount() {
         return 5;
     }
 
-    class PopularProductHolder extends RecyclerView.ViewHolder{
-        private ProductPopularListItemBinding mItemListBinding;
-        public PopularProductHolder(ProductPopularListItemBinding productPopularListItemBinding) {
-            super(productPopularListItemBinding.getRoot());
-            mItemListBinding =productPopularListItemBinding;
+    class RatingProductHolder extends RecyclerView.ViewHolder {
+        private ProductRatingListItemBinding mItemListBinding;
+
+        public RatingProductHolder(ProductRatingListItemBinding productRatingListItemBinding) {
+            super(productRatingListItemBinding.getRoot());
+            mItemListBinding = productRatingListItemBinding;
             mItemListBinding.setViewModel(mViewModel);
             mItemListBinding.setLifecycleOwner(mOwner);
-            Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets() , "fonts/Dirooz-FD.ttf");
+            Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets(), "fonts/Dirooz-FD.ttf");
             mItemListBinding.textViewProductName.setTypeface(typeFace);
             mItemListBinding.textViewProductPrice.setTypeface(typeFace);
         }
 
-        public void onBind(int position){
+        public void onBind(int position) {
             mItemListBinding.setPosition(position);
             mItemListBinding.executePendingBindings();
-            String imageURL = mViewModel.getPopularProductLiveData().getValue().get(position).getImages().get(0).getImageURL();
+            String imageURL = mViewModel.getRatingProductLiveData().getValue().get(position).getImages().get(0).getImageURL();
             Glide.with(mViewModel.getApplication()).load(imageURL).into(mItemListBinding.imageViewProductImage);
-//            String imageURL = product.getImages().get(0).getImageURL();
-//            Glide.with(mContext).load(imageURL).into(mItemListBinding.imageViewProductImage);
 //            mItemListBinding.textViewProductName.setText(product.getName());
 //            String number = product.getPrice();
 //            double amount = Double.parseDouble(number);
