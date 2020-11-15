@@ -14,13 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.digikala.R;
-import com.example.digikala.adapter.Horizontaladapter.HorizontalPopularProductListAdapter;
-import com.example.digikala.adapter.Horizontaladapter.HorizontalRatingProductListAdapter;
-import com.example.digikala.adapter.Horizontaladapter.HorizontalRecentProductListAdapter;
+import com.example.digikala.adapter.HorizontalRecentProductListAdapter;
 import com.example.digikala.data.model.Product;
 import com.example.digikala.databinding.FragmentHomeBinding;
 import com.example.digikala.ui.activity.ProductDetailActivity;
-import com.example.digikala.ui.activity.SingleFragmentActivity;
+import com.example.digikala.utillity.ListType;
 import com.example.digikala.viewmodel.HomeFragmentViewModel;
 
 import java.util.List;
@@ -30,8 +28,8 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding mHomeBinding;
     private HomeFragmentViewModel mViewModel;
     private HorizontalRecentProductListAdapter mRecentProductAdapter;
-    private HorizontalPopularProductListAdapter mPopularProductAdapter;
-    private HorizontalRatingProductListAdapter mRatingProductAdapter;
+    private HorizontalRecentProductListAdapter mPopularProductAdapter;
+    private HorizontalRecentProductListAdapter mRatingProductAdapter;
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -43,10 +41,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(requireActivity()).get(HomeFragmentViewModel.class);
+        mViewModel = new ViewModelProvider(this).get(HomeFragmentViewModel.class);
         observers();
         setHasOptionsMenu(true);
-
     }
 
     @Override
@@ -88,17 +85,17 @@ public class HomeFragment extends Fragment {
     }
 
     private void setRecentProductAdapter(List<Product> products) {
-        mRecentProductAdapter = new HorizontalRecentProductListAdapter(this, mViewModel);
+        mRecentProductAdapter = new HorizontalRecentProductListAdapter(this, mViewModel, ListType.RECENT_PRODUCT);
         mHomeBinding.newsProductRecycler.setAdapter(mRecentProductAdapter);
     }
 
     private void setPopularProductAdapter(List<Product> products) {
-        mPopularProductAdapter = new HorizontalPopularProductListAdapter(this, mViewModel);
+        mPopularProductAdapter = new HorizontalRecentProductListAdapter(this, mViewModel,ListType.POPULAR_PRODUCT);
         mHomeBinding.mostReviewRecycler.setAdapter(mPopularProductAdapter);
     }
 
     private void setRatingProductAdapter(List<Product> products) {
-        mRatingProductAdapter = new HorizontalRatingProductListAdapter(this, mViewModel);
+        mRatingProductAdapter = new HorizontalRecentProductListAdapter(this, mViewModel , ListType.RATING_PRODUCT);
         mHomeBinding.mostRateRecycler.setAdapter(mRatingProductAdapter);
     }
 

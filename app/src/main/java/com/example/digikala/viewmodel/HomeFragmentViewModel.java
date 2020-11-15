@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.digikala.data.model.Product;
 import com.example.digikala.data.repository.ProductRepository;
+import com.example.digikala.utillity.ListType;
 
 import java.util.List;
 
@@ -51,6 +52,42 @@ public class HomeFragmentViewModel extends AndroidViewModel {
         return mProductSelectedLiveData;
     }
 
+    public Product getProduct(int position , ListType listType){
+        Product product ;
+
+        switch (listType){
+            case RECENT_PRODUCT:
+                product = getRecentProductLiveData().getValue().get(position);
+                break;
+            case POPULAR_PRODUCT:
+                product = getPopularProductLiveData().getValue().get(position);
+                break;
+            default:
+                product = getRatingProductLiveData().getValue().get(position);
+                break;
+
+        }
+        return product;
+    }
+
+    public String getProductPrice(int position , ListType listType){
+        String productPrice = "";
+        if (listType == null)
+            listType = ListType.RECENT_PRODUCT;
+        switch (listType){
+            case RECENT_PRODUCT:
+                productPrice = getRecentProductLiveData().getValue().get(position).getPriceToman();
+                break;
+            case POPULAR_PRODUCT:
+                productPrice = getPopularProductLiveData().getValue().get(position).getPriceToman();
+                break;
+            case RATING_PRODUCT:
+                productPrice = getRatingProductLiveData().getValue().get(position).getPriceToman();
+                break;
+        }
+        return productPrice;
+    }
+
     public void onItemSelectedRecentProduct(int position){
        Product product = mRecentProductLiveData.getValue().get(position);
        mProductSelectedLiveData.setValue(product);
@@ -64,6 +101,20 @@ public class HomeFragmentViewModel extends AndroidViewModel {
     public void onItemSelectedPopularProduct(int position){
         Product product = mPopularProductLiveData.getValue().get(position);
         mProductSelectedLiveData.setValue(product);
+    }
+
+    public void onItemSelected(int position , ListType listType){
+        switch (listType){
+            case RECENT_PRODUCT:
+                onItemSelectedRecentProduct(position);
+                break;
+            case POPULAR_PRODUCT:
+                onItemSelectedPopularProduct(position);
+                break;
+            case RATING_PRODUCT:
+                onItemSelectedRatingProduct(position);
+                break;
+        }
     }
 
 }

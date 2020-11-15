@@ -7,10 +7,16 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="news">جدیدترین ها</string>
-    <string name="see_more"><![CDATA[مشاهده همه >]]></string>
+    <string name="see_more">مشاهده همه</string>
     <string name="most_view">پر بازدیدترین ها</string>
     <string name="most_rate">بیشترین امتیاز</string>
     <string name="about_product">درباره کالا</string>
     <string name="add_to_basket">افزودن به سبد خرید</string>
     <string name="toman">تومان</string>
+    <string name="Digital">دیجیتال</string>
+    <string name="Clothing">مد و پوشاک</string>
+    <string name="SpecialSale">فروش ویژه</string>
+    <string name="SuperMarket">سوپرمارکت</string>
+    <string name="BookArt">کتاب و هنر</string>
+    <string name="Health">بهداشت</string>
 </resources>

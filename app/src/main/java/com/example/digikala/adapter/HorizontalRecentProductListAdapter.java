@@ -1,4 +1,4 @@
-package com.example.digikala.adapter.Horizontaladapter;
+package com.example.digikala.adapter;
 
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide;
 import com.example.digikala.R;
 import com.example.digikala.data.model.Product;
 import com.example.digikala.databinding.ProductItemListBinding;
+import com.example.digikala.utillity.ListType;
 import com.example.digikala.viewmodel.HomeFragmentViewModel;
 
 import java.util.List;
@@ -22,10 +23,16 @@ public class HorizontalRecentProductListAdapter extends RecyclerView.Adapter<Hor
     private List<Product> mProductList;
     private HomeFragmentViewModel mViewModel;
     private LifecycleOwner mOwner ;
+    private ListType mListType;
 
-    public HorizontalRecentProductListAdapter(LifecycleOwner owner , HomeFragmentViewModel viewModel) {
+    public HorizontalRecentProductListAdapter(
+            LifecycleOwner owner ,
+            HomeFragmentViewModel viewModel ,
+            ListType listType) {
+
         mOwner = owner ;
         mViewModel = viewModel;
+        mListType = listType;
     }
 
     public List<Product> getProductList() {
@@ -64,7 +71,8 @@ public class HorizontalRecentProductListAdapter extends RecyclerView.Adapter<Hor
             super(productItemListBinding.getRoot());
             mItemListBinding =productItemListBinding;
             mItemListBinding.setViewModel(mViewModel);
-            mItemListBinding.setLifecycleOwner(mOwner);
+           // mItemListBinding.setLifecycleOwner(mOwner);
+            mItemListBinding.setListType(mListType);
             Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets() , "fonts/Dirooz-FD.ttf");
             mItemListBinding.textViewProductName.setTypeface(typeFace);
             mItemListBinding.textViewProductPrice.setTypeface(typeFace);
@@ -73,15 +81,19 @@ public class HorizontalRecentProductListAdapter extends RecyclerView.Adapter<Hor
         public void onBind(int position){
             mItemListBinding.setPosition(position);
             mItemListBinding.executePendingBindings();
-            String imageURL = mViewModel.getRecentProductLiveData().getValue().get(position).getImages().get(0).getImageURL();
+            String imageURL = null;
+            switch (mListType){
+                case RATING_PRODUCT:
+                    imageURL = mViewModel.getRatingProductLiveData().getValue().get(position).getImages().get(0).getImageURL();
+                    break;
+                case RECENT_PRODUCT:
+                    imageURL = mViewModel.getRecentProductLiveData().getValue().get(position).getImages().get(0).getImageURL();
+                    break;
+                case POPULAR_PRODUCT:
+                    imageURL = mViewModel.getPopularProductLiveData().getValue().get(position).getImages().get(0).getImageURL();
+                    break;
+            }
             Glide.with(mViewModel.getApplication()).load(imageURL).into(mItemListBinding.imageViewProductImage);
-//            String imageURL = product.getImages().get(0).getImageURL();
-//            Glide.with(mContext).load(imageURL).into(mItemListBinding.imageViewProductImage);
-//            mItemListBinding.textViewProductName.setText(product.getName());
-//            String number = product.getPrice();
-//            double amount = Double.parseDouble(number);
-//            DecimalFormat formatter = new DecimalFormat("#,###");
-//            mItemListBinding.textViewProductPrice.setText(formatter.format(amount) + " تومان ");
         }
     }
 }

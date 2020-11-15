@@ -69,23 +69,13 @@
 
                 <TextView
                     android:id="@+id/news_see_more_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="@string/see_more"
-                    android:textColor="#2979FF"
-                    android:textSize="14sp" />
+                    style="@style/textViewSeeMore" />
 
                 <TextView
                     android:id="@+id/textView_news_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
                     android:text="@string/news"
-                    android:textColor="#050505"
-                    android:textSize="20sp" />
+                    style="@style/textViewTitle"
+                    />
 
             </LinearLayout>
 
@@ -105,23 +95,13 @@
 
                 <TextView
                     android:id="@+id/most_view_see_more_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="@string/see_more"
-                    android:textColor="#2979FF"
-                    android:textSize="14sp" />
+                    style="@style/textViewSeeMore"/>
 
                 <TextView
                     android:id="@+id/textView_popular_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
+                    style="@style/textViewTitle"
                     android:text="@string/most_view"
-                    android:textColor="#050505"
-                    android:textSize="20sp" />
+                    />
 
             </LinearLayout>
 
@@ -141,23 +121,12 @@
 
                 <TextView
                     android:id="@+id/most_rate_see_more_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:text="@string/see_more"
-                    android:textColor="#2979FF"
-                    android:textSize="14sp" />
+                    style="@style/textViewSeeMore" />
 
                 <TextView
                     android:id="@+id/textView_rating_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
                     android:text="@string/most_rate"
-                    android:textColor="#050505"
-                    android:textSize="20sp" />
+                    style="@style/textViewTitle" />
 
             </LinearLayout>
 
