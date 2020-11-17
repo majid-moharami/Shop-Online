@@ -7,7 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.digikala.data.model.Product;
+import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.data.repository.ProductRepository;
 
 public class DetailFragmentViewModel extends AndroidViewModel {

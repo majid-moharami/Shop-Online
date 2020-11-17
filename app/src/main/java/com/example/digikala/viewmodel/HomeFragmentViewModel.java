@@ -1,17 +1,12 @@
 package com.example.digikala.viewmodel;
 
 import android.app.Application;
-import android.widget.ImageView;
 
-import androidx.databinding.BindingAdapter;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-import com.example.digikala.data.model.Product;
+import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.data.repository.ProductRepository;
 import com.example.digikala.utillity.ListType;
 

@@ -2,13 +2,11 @@ package com.example.digikala.data.repository;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.digikala.data.model.Product;
-import com.example.digikala.data.network.RequestParams;
+import com.example.digikala.data.model.poduct.Product;
+import com.example.digikala.data.network.parameter.RequestParams;
 import com.example.digikala.data.network.retrofit.RetrofitInstance;
 import com.example.digikala.data.network.retrofit.WooCommerceService;
 
@@ -39,12 +37,11 @@ public class ProductRepository {
 
     public ProductRepository() {
         //mContext = context.getApplicationContext();
-
     }
 
     public void fetchRecentProduct(){
         mCommerceService = retrofit.create(WooCommerceService .class);
-        Call<List<Product>> listCall = mCommerceService.listAllProduct(RequestParams.RECENT_PRODUCT);
+        Call<List<Product>> listCall = mCommerceService.listAllProduct(RequestParams.BASE_PARAM);
         listCall.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -92,7 +89,7 @@ public class ProductRepository {
 
     public void fetchProduct(String id){
         mCommerceService = retrofitSingleProduct.create(WooCommerceService.class);
-        Call<Product> productCall = mCommerceService.product(id , RequestParams.RECENT_PRODUCT);
+        Call<Product> productCall = mCommerceService.product(id , RequestParams.BASE_PARAM);
         productCall.enqueue(new Callback<Product>() {
             @Override
             public void onResponse(Call<Product> call, Response<Product> response) {

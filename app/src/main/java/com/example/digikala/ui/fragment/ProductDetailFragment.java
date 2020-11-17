@@ -16,10 +16,9 @@ import android.view.ViewGroup;
 
 import com.example.digikala.R;
 import com.example.digikala.adapter.SliderAdapter;
-import com.example.digikala.data.model.Product;
+import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.databinding.FragmentProductDetailBinding;
 import com.example.digikala.viewmodel.DetailFragmentViewModel;
-import com.example.digikala.viewmodel.HomeFragmentViewModel;
 
 public class ProductDetailFragment extends Fragment {
 

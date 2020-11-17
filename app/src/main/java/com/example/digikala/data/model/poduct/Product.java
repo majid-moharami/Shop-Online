@@ -1,4 +1,7 @@
-package com.example.digikala.data.model;
+package com.example.digikala.data.model.poduct;
+
+import com.example.digikala.data.model.ProductCategory;
+import com.example.digikala.data.model.ProductImage;
 
 import java.text.DecimalFormat;
 import java.util.List;

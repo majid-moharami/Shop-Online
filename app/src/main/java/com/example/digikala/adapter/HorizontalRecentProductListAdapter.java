@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.digikala.R;
-import com.example.digikala.data.model.Product;
+import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.databinding.ProductItemListBinding;
 import com.example.digikala.utillity.ListType;
 import com.example.digikala.viewmodel.HomeFragmentViewModel;

@@ -1,6 +1,6 @@
 package com.example.digikala.data.network.retrofit;
 
-import com.example.digikala.data.model.Product;
+import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.data.model.ProductCategory;
 import com.example.digikala.data.model.ProductImage;
 import com.google.gson.JsonArray;

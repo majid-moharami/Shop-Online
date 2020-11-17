@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.digikala.R;
 import com.example.digikala.databinding.ActivitySingleFragmentBinding;
-import com.example.digikala.ui.fragment.GroupingFragment;
+import com.example.digikala.ui.fragment.CategoryFragment;
 import com.example.digikala.ui.fragment.HomeFragment;
 import com.example.digikala.ui.fragment.MyDigikalaFragment;
 import com.example.digikala.ui.fragment.ShoppingCartFragment;
@@ -40,6 +40,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
 
         mBinding.bottomNav.setItemIconTintList(null);
         mBinding.bottomNav.setOnNavigationItemSelectedListener(mReselectedListener);
+        mBinding.bottomNav.setSelectedItemId(R.id.home_nav);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mReselectedListener =
@@ -52,7 +53,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
                             fragment = HomeFragment.newInstance();
                             break;
                         case R.id.grouping_nav:
-                            fragment = GroupingFragment.newInstance();
+                            fragment = CategoryFragment.newInstance();
                             break;
                         case R.id.basket_nav:
                             fragment = ShoppingCartFragment.newInstance();

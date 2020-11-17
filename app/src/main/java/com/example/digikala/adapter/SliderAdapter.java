@@ -8,7 +8,7 @@ import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
 import com.example.digikala.R;
-import com.example.digikala.data.model.Product;
+import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.data.model.ProductImage;
 import com.example.digikala.databinding.SliderItemBinding;
 import com.smarteist.autoimageslider.SliderViewAdapter;

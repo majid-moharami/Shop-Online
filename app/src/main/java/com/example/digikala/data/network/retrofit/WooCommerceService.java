@@ -1,6 +1,7 @@
 package com.example.digikala.data.network.retrofit;
 
-import com.example.digikala.data.model.Product;
+import com.example.digikala.data.model.poduct.Product;
+import com.example.digikala.data.model.category.Category;
 
 import java.util.List;
 import java.util.Map;
@@ -17,4 +18,7 @@ public interface WooCommerceService {
 
     @GET("{id}/")
     Call<Product> product( @Path("id") String id , @QueryMap Map<String, String> products );
+
+    @GET(".")
+    Call<List<Category>> SubCategories( @QueryMap Map<String, String> products , @Query("parent") int parent);
 }
