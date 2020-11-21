@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,30 +19,30 @@ import com.example.digikala.viewmodel.HomeFragmentViewModel;
 
 import java.util.List;
 
-public class HorizontalRecentProductListAdapter extends RecyclerView.Adapter<HorizontalRecentProductListAdapter.ProductHolder> {
+public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductHolder> {
 
     private List<Product> mProductList;
     private HomeFragmentViewModel mViewModel;
-    private LifecycleOwner mOwner ;
+    private LifecycleOwner mOwner;
     private ListType mListType;
+    private int mPage=2;
 
-    public HorizontalRecentProductListAdapter(
+    public ProductListAdapter(
             LifecycleOwner owner ,
             HomeFragmentViewModel viewModel ,
             ListType listType) {
-
-        mOwner = owner ;
+        mOwner = owner;
         mViewModel = viewModel;
         mListType = listType;
     }
-
-    public List<Product> getProductList() {
-        return mProductList;
-    }
-
-    public void setProductList(List<Product> productList) {
-        mProductList = productList;
-    }
+//
+//    public List<Product> getProductList() {
+//        return mProductList;
+//    }
+//
+//    public void setProductList(List<Product> productList) {
+//        mProductList = productList;
+//    }
 
     @NonNull
     @Override
@@ -58,11 +59,58 @@ public class HorizontalRecentProductListAdapter extends RecyclerView.Adapter<Hor
     @Override
     public void onBindViewHolder(@NonNull ProductHolder holder, int position) {
         holder.onBind(position);
+        switch (mListType){
+            case RECENT_PRODUCT:
+                if (position == mViewModel.getRecentProductLiveData().getValue().size()-1){
+                    mViewModel.updateList(mListType , mPage);
+                    mPage++;
+                }
+                break;
+            case POPULAR_PRODUCT:
+                if (position == mViewModel.getPopularProductLiveData().getValue().size()-1){
+                    mViewModel.updateList(mListType , mPage);
+                    mPage++;
+                }
+                break;
+            case RATING_PRODUCT:
+                if (position == mViewModel.getRatingProductLiveData().getValue().size()-1){
+                    mViewModel.updateList(mListType , mPage);
+                    mPage++;
+                }
+                break;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        final int[] size = {0};
+        switch (mListType){
+            case RECENT_PRODUCT:
+                 mViewModel.getRecentProductLiveData().observe(mOwner, new Observer<List<Product>>() {
+                    @Override
+                    public void onChanged(List<Product> products) {
+                        size[0] =products.size();
+                    }
+                });
+                break;
+            case RATING_PRODUCT:
+                mViewModel.getRatingProductLiveData().observe(mOwner, new Observer<List<Product>>() {
+                    @Override
+                    public void onChanged(List<Product> products) {
+                        size[0] =products.size();
+                    }
+                });
+                break;
+            case POPULAR_PRODUCT:
+                mViewModel.getPopularProductLiveData().observe(mOwner, new Observer<List<Product>>() {
+                    @Override
+                    public void onChanged(List<Product> products) {
+                        size[0] =products.size();
+                    }
+                });
+                break;
+        }
+        return size[0];
     }
 
     class ProductHolder extends RecyclerView.ViewHolder{

@@ -14,7 +14,7 @@ import retrofit2.http.QueryMap;
 
 public interface WooCommerceService {
     @GET(".")
-    Call<List<Product>> listAllProduct(@QueryMap Map<String, String> products );
+    Call<List<Product>> listAllProduct(@QueryMap Map<String, String> products ,  @Query("page") int page );
 
     @GET("{id}/")
     Call<Product> product( @Path("id") String id , @QueryMap Map<String, String> products );

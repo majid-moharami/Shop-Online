@@ -19,4 +19,5 @@
     <string name="SuperMarket">سوپرمارکت</string>
     <string name="BookArt">کتاب و هنر</string>
     <string name="Health">بهداشت</string>
+    <string name="no_sub_category">زیر مجموعه ای وجود ندارد</string>
 </resources>

@@ -21,6 +21,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -38,11 +39,31 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/Digital_product_recycler"
+                    android:id="@+id/sub_digital_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                 </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/textView_empty_Digital"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/btn_add_basket_background"
+                    android:padding="10dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/no_sub_category"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    android:textStyle="bold" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -61,11 +82,31 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/SpecialSale_product_recycler"
+                    android:id="@+id/sub_specialSale_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                 </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/textView_empty_special_sale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20sp"
+                    android:background="@drawable/btn_add_basket_background"
+                    android:padding="10dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="@string/no_sub_category" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -84,11 +125,31 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/Clothing_product_recycler"
+                    android:id="@+id/sub_clothing_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                 </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/textView_empty_clothing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20sp"
+                    android:background="@drawable/btn_add_basket_background"
+                    android:padding="10dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="@string/no_sub_category" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -107,11 +168,31 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/SuperMarket_product_recycler"
+                    android:id="@+id/sub_SuperMarket_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                 </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/textView_empty_super_market"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20sp"
+                    android:background="@drawable/btn_add_basket_background"
+                    android:padding="10dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="@string/no_sub_category" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -130,11 +211,31 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/BookArt_product_recycler"
+                    android:id="@+id/sub_BookArt_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                 </androidx.recyclerview.widget.RecyclerView>
+
+                <TextView
+                    android:id="@+id/textView_empty_art"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20sp"
+                    android:background="@drawable/btn_add_basket_background"
+                    android:padding="10dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="@string/no_sub_category" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="?android:attr/listDivider" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -153,11 +254,26 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/Health_product_recycler"
+                    android:id="@+id/sub_Health_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
                 </androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/textView_empty_health"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:textSize="20sp"
+                    android:background="@drawable/btn_add_basket_background"
+                    android:padding="10dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:text="@string/no_sub_category" />
 
             </LinearLayout>
         </ScrollView>

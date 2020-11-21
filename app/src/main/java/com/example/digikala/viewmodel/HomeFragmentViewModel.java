@@ -1,6 +1,7 @@
 package com.example.digikala.viewmodel;
 
 import android.app.Application;
+import android.content.Intent;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
@@ -8,16 +9,18 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.data.repository.ProductRepository;
+import com.example.digikala.ui.activity.ProductListActivity;
 import com.example.digikala.utillity.ListType;
 
 import java.util.List;
 
 public class HomeFragmentViewModel extends AndroidViewModel {
     private ProductRepository mProductRepository;
+    private static final int mPage = 1;
 
-    private LiveData<List<Product>> mRecentProductLiveData ;
-    private LiveData<List<Product>> mPopularProductLiveData ;
-    private LiveData<List<Product>> mRatingProductLiveData ;
+    private LiveData<List<Product>> mRecentProductLiveData;
+    private LiveData<List<Product>> mPopularProductLiveData;
+    private LiveData<List<Product>> mRatingProductLiveData;
     private MutableLiveData<Product> mProductSelectedLiveData = new MutableLiveData<>();
 
     public HomeFragmentViewModel(Application application) {
@@ -26,9 +29,9 @@ public class HomeFragmentViewModel extends AndroidViewModel {
         mRecentProductLiveData = mProductRepository.getRecentProductLiveData();
         mPopularProductLiveData = mProductRepository.getPopularProductLiveData();
         mRatingProductLiveData = mProductRepository.getRatingProductLiveData();
-        mProductRepository.fetchRecentProduct();
-        mProductRepository.fetchPopularProduct();
-        mProductRepository.fetchRatingProduct();
+        mProductRepository.fetchProducts(ListType.RECENT_PRODUCT, mPage);
+        mProductRepository.fetchProducts(ListType.POPULAR_PRODUCT, mPage);
+        mProductRepository.fetchProducts(ListType.RATING_PRODUCT, mPage);
     }
 
     public LiveData<List<Product>> getRecentProductLiveData() {
@@ -47,10 +50,10 @@ public class HomeFragmentViewModel extends AndroidViewModel {
         return mProductSelectedLiveData;
     }
 
-    public Product getProduct(int position , ListType listType){
-        Product product ;
+    public Product getProduct(int position, ListType listType) {
+        Product product;
 
-        switch (listType){
+        switch (listType) {
             case RECENT_PRODUCT:
                 product = getRecentProductLiveData().getValue().get(position);
                 break;
@@ -65,51 +68,37 @@ public class HomeFragmentViewModel extends AndroidViewModel {
         return product;
     }
 
-    public String getProductPrice(int position , ListType listType){
-        String productPrice = "";
-        if (listType == null)
-            listType = ListType.RECENT_PRODUCT;
-        switch (listType){
+    public void updateList(ListType listType, int page) {
+        mProductRepository.fetchProducts(listType, page);
+    }
+
+    //when this method invoke, set the SelectedMutableLiveData and run the observers in fragment.
+    public void onItemSelected(int position, ListType listType) {
+        switch (listType) {
             case RECENT_PRODUCT:
-                productPrice = getRecentProductLiveData().getValue().get(position).getPriceToman();
+                mProductSelectedLiveData.setValue(mRecentProductLiveData.getValue().get(position));
                 break;
             case POPULAR_PRODUCT:
-                productPrice = getPopularProductLiveData().getValue().get(position).getPriceToman();
+                mProductSelectedLiveData.setValue(mPopularProductLiveData.getValue().get(position));
                 break;
             case RATING_PRODUCT:
-                productPrice = getRatingProductLiveData().getValue().get(position).getPriceToman();
+                mProductSelectedLiveData.setValue(mRatingProductLiveData.getValue().get(position));
                 break;
         }
-        return productPrice;
     }
 
-    public void onItemSelectedRecentProduct(int position){
-       Product product = mRecentProductLiveData.getValue().get(position);
-       mProductSelectedLiveData.setValue(product);
+    public void seeMoreRecentClick(){
+        Intent intent = ProductListActivity.newIntent(getApplication() , -1 , ListType.RECENT_PRODUCT);
+        getApplication().startActivity(intent);
     }
 
-    public void onItemSelectedRatingProduct(int position){
-        Product product = mRatingProductLiveData.getValue().get(position);
-        mProductSelectedLiveData.setValue(product);
+    public void seeMorePopularClick(){
+        Intent intent = ProductListActivity.newIntent(getApplication() , -1 , ListType.POPULAR_PRODUCT);
+        getApplication().startActivity(intent);
     }
-
-    public void onItemSelectedPopularProduct(int position){
-        Product product = mPopularProductLiveData.getValue().get(position);
-        mProductSelectedLiveData.setValue(product);
-    }
-
-    public void onItemSelected(int position , ListType listType){
-        switch (listType){
-            case RECENT_PRODUCT:
-                onItemSelectedRecentProduct(position);
-                break;
-            case POPULAR_PRODUCT:
-                onItemSelectedPopularProduct(position);
-                break;
-            case RATING_PRODUCT:
-                onItemSelectedRatingProduct(position);
-                break;
-        }
+    public void seeMoreRatingClick(){
+        Intent intent = ProductListActivity.newIntent(getApplication() , -1 , ListType.RATING_PRODUCT);
+        getApplication().startActivity(intent);
     }
 
 }

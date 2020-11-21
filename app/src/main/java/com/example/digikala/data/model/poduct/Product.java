@@ -1,5 +1,7 @@
 package com.example.digikala.data.model.poduct;
 
+import android.util.Log;
+
 import com.example.digikala.data.model.ProductCategory;
 import com.example.digikala.data.model.ProductImage;
 
@@ -55,9 +57,11 @@ public class Product {
 
     public String getPrice() {
         String number = mPrice;
+        if (!number.equals("")){
         double amount = Double.parseDouble(number);
         DecimalFormat formatter = new DecimalFormat("#,###");
         return formatter.format(amount);
+        }else return "0";
     }
 
     public String getPriceToman(){

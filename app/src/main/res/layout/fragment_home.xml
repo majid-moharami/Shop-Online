@@ -3,6 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.digikala.viewmodel.HomeFragmentViewModel" />
+    </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -69,7 +74,8 @@
 
                 <TextView
                     android:id="@+id/news_see_more_text"
-                    style="@style/textViewSeeMore" />
+                    style="@style/textViewSeeMore"
+                    android:onClick="@{()-> viewModel.seeMoreRecentClick()}"/>
 
                 <TextView
                     android:id="@+id/textView_news_title"
@@ -95,7 +101,8 @@
 
                 <TextView
                     android:id="@+id/most_view_see_more_text"
-                    style="@style/textViewSeeMore"/>
+                    style="@style/textViewSeeMore"
+                    android:onClick="@{()-> viewModel.seeMorePopularClick()}"/>
 
                 <TextView
                     android:id="@+id/textView_popular_title"
@@ -121,7 +128,8 @@
 
                 <TextView
                     android:id="@+id/most_rate_see_more_text"
-                    style="@style/textViewSeeMore" />
+                    style="@style/textViewSeeMore"
+                    android:onClick="@{()-> viewModel.seeMoreRatingClick()}"/>
 
                 <TextView
                     android:id="@+id/textView_rating_title"
