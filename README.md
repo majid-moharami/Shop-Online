@@ -8,23 +8,23 @@ This is a shope online app similar digikala.
 # Detial in code
 
 1.Architecture
-  -MVVM
-  -LiveData
-  -DataBinding
-  -ViewModel
-  -SingleFragmentActivity
-  -Bottom Navigation
+   - MVVM
+   - LiveData
+   - DataBinding
+   - ViewModel
+   - SingleFragmentActivity
+   - Bottom Navigation
   
 2.Libraries Used
-  -Retrofit
-  -Glide
-  -Gson
-  -GsonCoverter
-  -Slider
+   - Retrofit
+   - Glide
+   - Gson
+   - GsonCoverter
+   - Slider
   
   
   # Soon (In the next two weeks)
-    -Using NavigationComponent 
-    -Using Splash Screen
-    -Using Paging
+    - Using NavigationComponent 
+    - Using Splash Screen
+    - Using Paging
   
