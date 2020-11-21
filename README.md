@@ -23,8 +23,8 @@ This is a shope online app similar digikala.
    - Slider
   
   
-  # Soon (In the next two weeks)
-    - Using NavigationComponent 
-    - Using Splash Screen
-    - Using Paging
+# Soon (In the next two weeks)
+     - Using NavigationComponent 
+     - Using Splash Screen
+     - Using Paging
   
