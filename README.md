@@ -27,4 +27,7 @@ This is a shope online app similar digikala.
      - Using NavigationComponent 
      - Using Splash Screen
      - Using Paging
+     - sreach product
+     - basket tab for buying the product 
+    
   
