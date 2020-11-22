@@ -5,8 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
-            name="viewModel"
-            type="com.example.digikala.viewmodel.HomeFragmentViewModel" />
+            name="RecentViewModel"
+            type="com.example.digikala.viewmodel.RecentProductViewModel" />
+        <variable
+            name="PopularViewModel"
+            type="com.example.digikala.viewmodel.PopularProductViewModel" />
+        <variable
+            name="RatingViewModel"
+            type="com.example.digikala.viewmodel.RatingProductViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,7 +81,7 @@
                 <TextView
                     android:id="@+id/news_see_more_text"
                     style="@style/textViewSeeMore"
-                    android:onClick="@{()-> viewModel.seeMoreRecentClick()}"/>
+                    android:onClick="@{()-> RecentViewModel.seeMoreRecentClick()}"/>
 
                 <TextView
                     android:id="@+id/textView_news_title"
@@ -102,7 +108,7 @@
                 <TextView
                     android:id="@+id/most_view_see_more_text"
                     style="@style/textViewSeeMore"
-                    android:onClick="@{()-> viewModel.seeMorePopularClick()}"/>
+                    android:onClick="@{()-> PopularViewModel.seeMorePopularClick()}"/>
 
                 <TextView
                     android:id="@+id/textView_popular_title"
@@ -129,7 +135,7 @@
                 <TextView
                     android:id="@+id/most_rate_see_more_text"
                     style="@style/textViewSeeMore"
-                    android:onClick="@{()-> viewModel.seeMoreRatingClick()}"/>
+                    android:onClick="@{()-> RatingViewModel.seeMoreRatingClick()}"/>
 
                 <TextView
                     android:id="@+id/textView_rating_title"

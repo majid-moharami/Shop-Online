@@ -24,6 +24,10 @@ import com.example.digikala.ui.activity.ProductListActivity;
 import com.example.digikala.utillity.ListType;
 import com.example.digikala.utillity.ProductDiffUtil;
 import com.example.digikala.viewmodel.HomeFragmentViewModel;
+import com.example.digikala.viewmodel.PopularProductViewModel;
+import com.example.digikala.viewmodel.ProductStrategyViewModel;
+import com.example.digikala.viewmodel.RatingProductViewModel;
+import com.example.digikala.viewmodel.RecentProductViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +35,10 @@ import java.util.List;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding mHomeBinding;
-    private HomeFragmentViewModel mViewModel;
+    private ProductStrategyViewModel mRecentViewModel;
+    private ProductStrategyViewModel mPopularViewModel;
+    private ProductStrategyViewModel mRatingViewModel;
+
     private ProductListAdapter mRecentProductAdapter;
     private ProductListAdapter mPopularProductAdapter;
     private ProductListAdapter mRatingProductAdapter;
@@ -48,7 +55,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(HomeFragmentViewModel.class);
+        mRecentViewModel = new ViewModelProvider(this).get(RecentProductViewModel.class);
+        mPopularViewModel = new ViewModelProvider(this).get(PopularProductViewModel.class);
+        mRatingViewModel = new ViewModelProvider(this).get(RatingProductViewModel.class);
         observers();
         setHasOptionsMenu(true);
     }
@@ -57,19 +66,13 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
-        mHomeBinding.setViewModel(mViewModel);
+        mHomeBinding.setRecentViewModel((RecentProductViewModel) mRecentViewModel);
+        mHomeBinding.setPopularViewModel((PopularProductViewModel) mPopularViewModel);
+        mHomeBinding.setRatingViewModel((RatingProductViewModel) mRatingViewModel);
         setFont();
         //
         setRecyclerLayouts();
         getActivity().setActionBar(mHomeBinding.toolbar);
-
-        mHomeBinding.newsSeeMoreText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //mViewModel.updateList(ListType.RECENT_PRODUCT, 2);
-            }
-        });
         return mHomeBinding.getRoot();
     }
 
@@ -102,23 +105,23 @@ public class HomeFragment extends Fragment {
     }
 
     private void setRecentProductAdapter(List<Product> products) {
-        mRecentProductAdapter = new ProductListAdapter(this, mViewModel, ListType.RECENT_PRODUCT);
+        mRecentProductAdapter = new ProductListAdapter(this, mRecentViewModel, ListType.RECENT_PRODUCT);
         mHomeBinding.newsProductRecycler.setAdapter(mRecentProductAdapter);
         mProductsOld.addAll(products);
     }
 
     private void setPopularProductAdapter(List<Product> products) {
-        mPopularProductAdapter = new ProductListAdapter(this, mViewModel, ListType.POPULAR_PRODUCT);
+        mPopularProductAdapter = new ProductListAdapter(this, mPopularViewModel, ListType.POPULAR_PRODUCT);
         mHomeBinding.mostReviewRecycler.setAdapter(mPopularProductAdapter);
     }
 
     private void setRatingProductAdapter(List<Product> products) {
-        mRatingProductAdapter = new ProductListAdapter(this, mViewModel, ListType.RATING_PRODUCT);
+        mRatingProductAdapter = new ProductListAdapter(this, mRatingViewModel, ListType.RATING_PRODUCT);
         mHomeBinding.mostRateRecycler.setAdapter(mRatingProductAdapter);
     }
 
     private void observers() {
-        mViewModel.getRecentProductLiveData().observe(this, new Observer<List<Product>>() {
+        mRecentViewModel.getProductLiveData().observe(this, new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
                 if (mRecentProductAdapter == null) {
@@ -128,7 +131,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        mViewModel.getPopularProductLiveData().observe(this, new Observer<List<Product>>() {
+        mPopularViewModel.getProductLiveData().observe(this, new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
                 if (mPopularProductAdapter == null) {
@@ -137,7 +140,7 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        mViewModel.getRatingProductLiveData().observe(this, new Observer<List<Product>>() {
+        mRatingViewModel.getProductLiveData().observe(this, new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
                 if (mRatingProductAdapter == null ) {
@@ -146,7 +149,20 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        mViewModel.getProductSelectedLiveData().observe(this, new Observer<Product>() {
+        mRecentViewModel.getProductSelectedLiveData().observe(this, new Observer<Product>() {
+            @Override
+            public void onChanged(Product product) {
+                startActivity(ProductDetailActivity.newIntent(getContext(), Integer.parseInt(product.getId())));
+            }
+        });
+
+        mPopularViewModel.getProductSelectedLiveData().observe(this, new Observer<Product>() {
+            @Override
+            public void onChanged(Product product) {
+                startActivity(ProductDetailActivity.newIntent(getContext(), Integer.parseInt(product.getId())));
+            }
+        });
+        mRatingViewModel.getProductSelectedLiveData().observe(this, new Observer<Product>() {
             @Override
             public void onChanged(Product product) {
                 startActivity(ProductDetailActivity.newIntent(getContext(), Integer.parseInt(product.getId())));

@@ -56,7 +56,6 @@ public class ProductRepository {
                     @Override
                     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                         if (response.isSuccessful()){
-                            assert response.body() != null;
                             if (response.body().size()>0){
                                 if (page == 1){
                                     mRecentProductLiveData.setValue(response.body());
@@ -146,14 +145,17 @@ public class ProductRepository {
 
 
     public MutableLiveData<List<Product>> getRecentProductLiveData() {
+        fetchProducts(ListType.RECENT_PRODUCT , 1);
         return mRecentProductLiveData;
     }
 
     public MutableLiveData<List<Product>> getPopularProductLiveData() {
+        fetchProducts(ListType.POPULAR_PRODUCT , 1);
         return mPopularProductLiveData;
     }
 
     public MutableLiveData<List<Product>> getRatingProductLiveData() {
+        fetchProducts(ListType.RATING_PRODUCT , 1);
         return mRatingProductLiveData;
     }
 
