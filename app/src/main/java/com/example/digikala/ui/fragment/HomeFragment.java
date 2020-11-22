@@ -59,6 +59,7 @@ public class HomeFragment extends Fragment {
         mHomeBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false);
         mHomeBinding.setViewModel(mViewModel);
         setFont();
+        //
         setRecyclerLayouts();
         getActivity().setActionBar(mHomeBinding.toolbar);
 
