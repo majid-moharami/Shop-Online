@@ -15,7 +15,7 @@ import com.example.digikala.databinding.ActivitySingleFragmentBinding;
 import com.example.digikala.ui.fragment.CategoryFragment;
 import com.example.digikala.ui.fragment.HomeFragment;
 import com.example.digikala.ui.fragment.MyDigikalaFragment;
-import com.example.digikala.ui.fragment.ShoppingCartFragment;
+import com.example.digikala.ui.fragment.BasketFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {
@@ -56,7 +56,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
                             fragment = CategoryFragment.newInstance();
                             break;
                         case R.id.basket_nav:
-                            fragment = ShoppingCartFragment.newInstance();
+                            fragment = BasketFragment.newInstance();
                             break;
                         case R.id.my_dijikala_nav:
                             fragment =  MyDigikalaFragment.newInstance();
