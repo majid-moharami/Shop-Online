@@ -25,11 +25,13 @@ public class ProductRepository {
     private Context mContext;
     private WooCommerceService mCommerceService;
     private Retrofit retrofit = RetrofitInstance.getInstance();
+    private Retrofit retrofitCategoryProducts = RetrofitInstance.getProductsOfCategory();
     private Retrofit retrofitSingleProduct = RetrofitInstance.getInstanceSingleProduct();
 
     private MutableLiveData<List<Product>> mRecentProductLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mPopularProductLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mRatingProductLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<Product>> mProductCategoryLiveData = new MutableLiveData<>();
     private MutableLiveData<Product> mSingleProductLiveData = new MutableLiveData<>();
 
     private List<Product> mOldRecentProduct = new ArrayList<>();
@@ -127,6 +129,33 @@ public class ProductRepository {
         }
     }
 
+    public void fetchCategoryProduct(int categoryId , int page){
+        mCommerceService = retrofitCategoryProducts.create(WooCommerceService.class);
+        Call<List<Product>> listCall = mCommerceService.productListOfCategory(RequestParams.BASE_PARAM , categoryId , page);
+        listCall.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful()){
+                    assert response.body() != null;
+                    if (response.body().size()>0){
+                        if (page == 1){
+                            mProductCategoryLiveData.setValue(response.body());
+                        }else {
+                            List<Product> list = mProductCategoryLiveData.getValue();
+                            list.addAll(response.body());
+                            mProductCategoryLiveData.setValue(list);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
+    }
+
     public void fetchProduct(String id) {
         mCommerceService = retrofitSingleProduct.create(WooCommerceService.class);
         Call<Product> productCall = mCommerceService.product(id, RequestParams.BASE_PARAM);
@@ -157,6 +186,11 @@ public class ProductRepository {
     public MutableLiveData<List<Product>> getRatingProductLiveData() {
         fetchProducts(ListType.RATING_PRODUCT , 1);
         return mRatingProductLiveData;
+    }
+
+    public MutableLiveData<List<Product>> getProductCategoryLiveData(int id ) {
+        fetchCategoryProduct(id , 1);
+        return mProductCategoryLiveData;
     }
 
     public MutableLiveData<Product> getSingleProductLiveData() {

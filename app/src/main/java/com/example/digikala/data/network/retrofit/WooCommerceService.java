@@ -21,4 +21,10 @@ public interface WooCommerceService {
 
     @GET(".")
     Call<List<Category>> SubCategories( @QueryMap Map<String, String> products , @Query("parent") int parent);
+
+    @GET(".")
+    Call<List<Product>> productListOfCategory(
+            @QueryMap Map<String, String> products ,
+            @Query("category") int category,
+            @Query("page") int page);
 }

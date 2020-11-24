@@ -1,11 +1,11 @@
 package com.example.digikala.ui.activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.DataBindingUtil;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.example.digikala.R;
 import com.example.digikala.databinding.ActivityProductListBinding;
@@ -18,15 +18,14 @@ public class ProductListActivity extends AppCompatActivity {
     private ActivityProductListBinding mBinding;
 
     /**
-     *
      * @param context
-     * @param categoryId if start this activity from categories put the category id else return -1.
+     * @param categoryId   if start this activity from categories put the category id else return -1.
      * @param hemeListType if start this activity from home fragment send the type of list to show else return null.
      * @return
      */
-    public static Intent newIntent(Context context , int categoryId, ListType hemeListType){
-        Intent intent = new Intent(context , ProductListActivity.class);
-        intent.putExtra(EXTRA_KEY_CATEGORY_ID , categoryId);
+    public static Intent newIntent(Context context, int categoryId, ListType hemeListType) {
+        Intent intent = new Intent(context, ProductListActivity.class);
+        intent.putExtra(EXTRA_KEY_CATEGORY_ID, categoryId);
         intent.putExtra(EXTRA_KEY_LIST_TYPE, hemeListType);
         return intent;
     }
@@ -34,22 +33,19 @@ public class ProductListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBinding = DataBindingUtil.setContentView(this , R.layout.activity_product_list);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_product_list);
 
-        int categoryId = getIntent().getIntExtra(EXTRA_KEY_CATEGORY_ID,-1);
+        int categoryId = getIntent().getIntExtra(EXTRA_KEY_CATEGORY_ID, -1);
         ListType listType = (ListType) getIntent().getSerializableExtra(EXTRA_KEY_LIST_TYPE);
 
 
-        if (categoryId==-1) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(
-                            R.id.list_fragment_container,
-                            ProductListFragment.newInstance(listType)
-                    )
-                    .commit();
-        }else {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(
+                        R.id.list_fragment_container,
+                        ProductListFragment.newInstance(listType, categoryId)
+                )
+                .commit();
 
-        }
     }
 }

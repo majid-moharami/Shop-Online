@@ -20,10 +20,18 @@ public abstract class ProductStrategyViewModel extends AndroidViewModel {
     private LiveData<List<Product>> mProductLiveData;
     private MutableLiveData<Product> mProductSelectedLiveData = new MutableLiveData<>();
     private ProductRepository mProductRepository;
+    private int mId;
 
 
     public ProductStrategyViewModel(@NonNull Application application , MutableLiveData<List<Product>> listLiveData) {
         super(application);
+        mProductRepository = ProductRepository.getInstance();
+        mProductLiveData = listLiveData;
+    }
+
+    public ProductStrategyViewModel(@NonNull Application application, MutableLiveData<List<Product>> listLiveData, int id) {
+        super(application);
+        mId = id;
         mProductRepository = ProductRepository.getInstance();
         mProductLiveData = listLiveData;
     }
@@ -42,8 +50,13 @@ public abstract class ProductStrategyViewModel extends AndroidViewModel {
     }
 
 
+
     public void updateList(ListType listType, int page) {
         mProductRepository.fetchProducts(listType, page);
+    }
+
+    public void updateCategoryProductsList(int page) {
+        ProductRepository.getInstance().fetchCategoryProduct(mId, page);
     }
 
     public void onItemSelected(int position, ListType listType) {

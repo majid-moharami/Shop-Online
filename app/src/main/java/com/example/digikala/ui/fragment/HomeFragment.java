@@ -23,7 +23,6 @@ import com.example.digikala.ui.activity.ProductDetailActivity;
 import com.example.digikala.ui.activity.ProductListActivity;
 import com.example.digikala.utillity.ListType;
 import com.example.digikala.utillity.ProductDiffUtil;
-import com.example.digikala.viewmodel.HomeFragmentViewModel;
 import com.example.digikala.viewmodel.PopularProductViewModel;
 import com.example.digikala.viewmodel.ProductStrategyViewModel;
 import com.example.digikala.viewmodel.RatingProductViewModel;

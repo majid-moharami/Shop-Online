@@ -17,9 +17,11 @@ import com.example.digikala.R;
 import com.example.digikala.adapter.SubCategoryListAdapter;
 import com.example.digikala.data.model.category.Category;
 import com.example.digikala.databinding.FragmentCategoryBinding;
+import com.example.digikala.ui.activity.ProductDetailActivity;
+import com.example.digikala.ui.activity.ProductListActivity;
 import com.example.digikala.utillity.HeadCategory;
+import com.example.digikala.utillity.ListType;
 import com.example.digikala.viewmodel.CategoryFragmentViewModel;
-import com.example.digikala.viewmodel.HomeFragmentViewModel;
 
 import java.util.List;
 
@@ -142,7 +144,7 @@ public class CategoryFragment extends Fragment {
         mViewModel.getCategorySubject().observe(this, new Observer<Category>() {
             @Override
             public void onChanged(Category category) {
-
+                startActivity(ProductListActivity.newIntent(getContext() , category.getId() , null));
             }
         });
     }
