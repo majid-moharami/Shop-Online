@@ -1,6 +1,6 @@
-# Shope-Online
-## this project is not compelete yet
-This is a shope online app similar digikala.
+# Shop-Online
+## this project is not complete yet
+This is a shop online app similar digikala.
  
 # Screenshots
 ![shope-git](https://user-images.githubusercontent.com/68108673/99881197-90d59900-2c2d-11eb-8afe-7631aa7d3186.jpg)
@@ -27,4 +27,7 @@ This is a shope online app similar digikala.
      - Using NavigationComponent 
      - Using Splash Screen
      - Using Paging
+     - search product
+     - basket tab for buying the product 
+    
   
