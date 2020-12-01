@@ -3,7 +3,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">#FFFFFF</item>
-        <item name="colorPrimaryDark">#EC2A2A</item>
+        <item name="colorPrimaryDark">#F1F0F0</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="textViewTitle" >

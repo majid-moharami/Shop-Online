@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_homeFragment">
+    <fragment
+        android:id="@+id/nav_homeFragment"
+        android:name="com.example.digikala.ui.fragment.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_productDetailFragment"
+            app:destination="@id/nav_productDetailFragment" >
+        </action>
+        <action
+            android:id="@+id/action_homeFragment_to_productListFragment"
+            app:destination="@id/nav_productListFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/nav_categoryFragment"
+        android:name="com.example.digikala.ui.fragment.CategoryFragment"
+        android:label="CategoryFragment" >
+        <action
+            android:id="@+id/action_categoryFragment_to_productListFragment"
+            app:destination="@id/nav_productListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_basketFragment"
+        android:name="com.example.digikala.ui.fragment.BasketFragment"
+        android:label="fragment_basket"
+        tools:layout="@layout/fragment_basket" />
+    <fragment
+        android:id="@+id/nav_myDigikalaFragment"
+        android:name="com.example.digikala.ui.fragment.MyDigikalaFragment"
+        android:label="fragment_my_digikala"
+        tools:layout="@layout/fragment_my_digikala" />
+    <fragment
+        android:id="@+id/nav_productDetailFragment"
+        android:name="com.example.digikala.ui.fragment.ProductDetailFragment"
+        android:label="ProductDetailFragment" >
+        <argument
+            android:name="productId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_productListFragment"
+        android:name="com.example.digikala.ui.fragment.ProductListFragment"
+        android:label="ProductListFragment" >
+        <action
+            android:id="@+id/action_productListFragment_to_productDetailFragment"
+            app:destination="@id/nav_productDetailFragment" />
+        <argument
+            android:name="ListType"
+            app:argType="com.example.digikala.utillity.ListType"
+          />
+        <argument
+            android:name="CategoryId"
+            app:argType="integer" />
+
+
+    </fragment>
+
+</navigation>

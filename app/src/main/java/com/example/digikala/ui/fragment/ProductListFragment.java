@@ -4,12 +4,16 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,10 +61,10 @@ public class ProductListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Log.d("MAJID" , "INVOKE ONCREATE");
         //if user come from home fragment
-        if (getArguments().getSerializable(BUNDLE_KYE_LIST_TYPE) != null){
-            mListType = (ListType) getArguments().getSerializable(BUNDLE_KYE_LIST_TYPE);
+        ListType mListType = ProductListFragmentArgs.fromBundle(getArguments()).getListType();
+        if (mListType != null && mListType != ListType.NONE){
             switch (mListType){
                 case RECENT_PRODUCT:
                     mViewModel = new ViewModelProvider(this).get(RecentProductViewModel.class);
@@ -71,28 +75,50 @@ public class ProductListFragment extends Fragment {
                 case RATING_PRODUCT:
                     mViewModel = new ViewModelProvider(this).get(RatingProductViewModel.class);
             }
+            mAdapterHomeLists = new ProductListAdapter(
+                    ProductListFragment.this ,
+                    mViewModel,
+                    mListType);
             observersHomeLists();
         }else {
-             categoryId = getArguments().getInt(BUNDLE_KYE_CATEGORY_ID);
+            categoryId = ProductListFragmentArgs.fromBundle(getArguments()).getCategoryId();
             mViewModel = new
-                    ViewModelProvider(requireActivity() ,
-                    new CategoryListViewModelFactory((Application) getContext().getApplicationContext(),
-                            categoryId)).get(CategoryProductListViewModel.class);
+                    ViewModelProvider(this ,
+                    new CategoryListViewModelFactory((Application) getContext().getApplicationContext(),categoryId))
+                    .get(CategoryProductListViewModel.class);
+            mAdapterCategoryLists = new CategoryProductListAdapter(ProductListFragment.this  , mViewModel, mListType , categoryId);
             observerCategoryLists();
         }
 
     }
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.d("MAJID" , "INVOKE onCreateView");
         mBinding = DataBindingUtil.inflate(inflater , R.layout.fragment_product_list , container , false);
         setRecyclerLayoutManager();
         //setTitle();
         return mBinding.getRoot();
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Log.d("MAJID" , "INVOKE onViewCreated");
+
+        /**
+         * when user select a product and go to DetailFragment and
+         * when back to this fragment we should set the adapter to recycler view.
+         * if we dont this set , fragment show empty list.
+         */
+        if (mListType != null && mListType != ListType.NONE)
+            mBinding.productsRecycler.setAdapter(mAdapterHomeLists);
+        else {
+            mBinding.productsRecycler.setAdapter(mAdapterCategoryLists);
+        }
 
     }
 
@@ -117,10 +143,7 @@ public class ProductListFragment extends Fragment {
 
     private void observersHomeLists(){
         mViewModel.getProductLiveData().observe(this , products -> {
-            if (mAdapterHomeLists == null){
-                        mAdapterHomeLists = createAdapter();
-                        mBinding.productsRecycler.setAdapter(mAdapterHomeLists);
-                    }else mAdapterHomeLists.notifyDataSetChanged();
+            mAdapterHomeLists.notifyDataSetChanged();
         });
         mViewModel.getProductSelectedLiveData().observe(this, new Observer<Product>() {
             @Override
@@ -130,26 +153,19 @@ public class ProductListFragment extends Fragment {
         });
     }
 
-    public ProductListAdapter createAdapter(){
-      return new ProductListAdapter(
-                ProductListFragment.this ,
-              mViewModel,
-                mListType);
-    }
     private void observerCategoryLists(){
         mViewModel.getProductLiveData().observe(this, new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                if (mAdapterCategoryLists == null){
-                    mAdapterCategoryLists = new CategoryProductListAdapter(ProductListFragment.this  , mViewModel, mListType , categoryId);
-                    mBinding.productsRecycler.setAdapter(mAdapterCategoryLists);
-                }else mAdapterCategoryLists.notifyDataSetChanged();
+                mAdapterCategoryLists.notifyDataSetChanged();
             }
         });
         mViewModel.getProductSelectedLiveData().observe(this, new Observer<Product>() {
             @Override
             public void onChanged(Product product) {
-                startActivity(ProductDetailActivity.newIntent(getContext(), Integer.parseInt(product.getId())));
+                ProductListFragmentDirections.ActionProductListFragmentToProductDetailFragment action =
+                        ProductListFragmentDirections.actionProductListFragmentToProductDetailFragment(Integer.parseInt(product.getId()));
+                Navigation.findNavController(mBinding.getRoot()).navigate(action);
             }
         });
     }

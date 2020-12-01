@@ -8,18 +8,25 @@
         android:layout_height="match_parent"
         tools:context=".ui.fragment.CategoryFragment">
 
+        <include
+            android:id="@+id/include2"
+            layout="@layout/search_toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/include2">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
 
                 <LinearLayout
@@ -33,8 +40,8 @@
 
                     <TextView
                         android:id="@+id/textView_Digital_title"
-                        android:text="@string/Digital"
-                        style="@style/textViewTitle" />
+                        style="@style/textViewTitle"
+                        android:text="@string/Digital" />
 
                 </LinearLayout>
 
@@ -42,24 +49,24 @@
                     android:id="@+id/sub_digital_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                </androidx.recyclerview.widget.RecyclerView>
+                    android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
 
                 <TextView
                     android:id="@+id/textView_empty_Digital"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/btn_add_basket_background"
-                    android:padding="10dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_gravity="center"
                     android:gravity="center"
+                    android:padding="10dp"
                     android:text="@string/no_sub_category"
+                    android:textColor="#FFFFFF"
                     android:textSize="20sp"
-                    android:visibility="gone"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -76,8 +83,8 @@
 
                     <TextView
                         android:id="@+id/SpecialSale_Clothing_title"
-                        android:text="@string/SpecialSale"
-                        style="@style/textViewTitle" />
+                        style="@style/textViewTitle"
+                        android:text="@string/SpecialSale" />
 
                 </LinearLayout>
 
@@ -85,23 +92,23 @@
                     android:id="@+id/sub_specialSale_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                </androidx.recyclerview.widget.RecyclerView>
+                    android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
+
                 <TextView
                     android:id="@+id/textView_empty_special_sale"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    android:textSize="20sp"
                     android:background="@drawable/btn_add_basket_background"
-                    android:padding="10dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_gravity="center"
-                    android:textStyle="bold"
                     android:gravity="center"
-                    android:visibility="gone"
-                    android:text="@string/no_sub_category" />
+                    android:padding="10dp"
+                    android:text="@string/no_sub_category"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
                 <View
                     android:layout_width="match_parent"
@@ -119,8 +126,8 @@
 
                     <TextView
                         android:id="@+id/textView_Clothing_title"
-                        android:text="@string/Clothing"
-                        style="@style/textViewTitle" />
+                        style="@style/textViewTitle"
+                        android:text="@string/Clothing" />
 
                 </LinearLayout>
 
@@ -128,24 +135,24 @@
                     android:id="@+id/sub_clothing_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                </androidx.recyclerview.widget.RecyclerView>
+                    android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
 
                 <TextView
                     android:id="@+id/textView_empty_clothing"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    android:textSize="20sp"
                     android:background="@drawable/btn_add_basket_background"
-                    android:padding="10dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_gravity="center"
-                    android:textStyle="bold"
                     android:gravity="center"
-                    android:visibility="gone"
-                    android:text="@string/no_sub_category" />
+                    android:padding="10dp"
+                    android:text="@string/no_sub_category"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -162,8 +169,8 @@
 
                     <TextView
                         android:id="@+id/SuperMarket_Clothing_title"
-                        android:text="@string/SuperMarket"
-                        style="@style/textViewTitle" />
+                        style="@style/textViewTitle"
+                        android:text="@string/SuperMarket" />
 
                 </LinearLayout>
 
@@ -171,23 +178,23 @@
                     android:id="@+id/sub_SuperMarket_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                </androidx.recyclerview.widget.RecyclerView>
+                    android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
+
                 <TextView
                     android:id="@+id/textView_empty_super_market"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    android:textSize="20sp"
                     android:background="@drawable/btn_add_basket_background"
-                    android:padding="10dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_gravity="center"
-                    android:textStyle="bold"
                     android:gravity="center"
-                    android:visibility="gone"
-                    android:text="@string/no_sub_category" />
+                    android:padding="10dp"
+                    android:text="@string/no_sub_category"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
                 <View
                     android:layout_width="match_parent"
@@ -205,8 +212,8 @@
 
                     <TextView
                         android:id="@+id/BookArt_Clothing_title"
-                        android:text="@string/BookArt"
-                        style="@style/textViewTitle" />
+                        style="@style/textViewTitle"
+                        android:text="@string/BookArt" />
 
                 </LinearLayout>
 
@@ -214,24 +221,24 @@
                     android:id="@+id/sub_BookArt_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                </androidx.recyclerview.widget.RecyclerView>
+                    android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
 
                 <TextView
                     android:id="@+id/textView_empty_art"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    android:textSize="20sp"
                     android:background="@drawable/btn_add_basket_background"
-                    android:padding="10dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_gravity="center"
-                    android:textStyle="bold"
                     android:gravity="center"
-                    android:visibility="gone"
-                    android:text="@string/no_sub_category" />
+                    android:padding="10dp"
+                    android:text="@string/no_sub_category"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -248,8 +255,8 @@
 
                     <TextView
                         android:id="@+id/textView_Health_title"
-                        android:text="@string/Health"
-                        style="@style/textViewTitle" />
+                        style="@style/textViewTitle"
+                        android:text="@string/Health" />
 
                 </LinearLayout>
 
@@ -257,23 +264,23 @@
                     android:id="@+id/sub_Health_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                </androidx.recyclerview.widget.RecyclerView>
+                    android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
+
                 <TextView
                     android:id="@+id/textView_empty_health"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:layout_gravity="center"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
-                    android:textSize="20sp"
                     android:background="@drawable/btn_add_basket_background"
-                    android:padding="10dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_gravity="center"
-                    android:textStyle="bold"
                     android:gravity="center"
-                    android:visibility="gone"
-                    android:text="@string/no_sub_category" />
+                    android:padding="10dp"
+                    android:text="@string/no_sub_category"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
             </LinearLayout>
         </ScrollView>

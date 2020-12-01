@@ -4,6 +4,8 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -42,9 +44,8 @@ public class ProductDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(requireActivity()).get(DetailFragmentViewModel.class);
+        mId = ProductDetailFragmentArgs.fromBundle(getArguments()).getProductId();
 
-
-        mId = getArguments().getInt(BUNDLE_KEY_PRODUCT_ID);
         mViewModel.fetchProduct(String.valueOf(mId));
         mViewModel.getProductLiveData().observe(this, new Observer<Product>() {
             @Override
@@ -71,6 +72,8 @@ public class ProductDetailFragment extends Fragment {
         mBinding.setLifecycleOwner(this);
         return mBinding.getRoot();
     }
+
+
 
     private void formatTexts() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

@@ -1,15 +1,19 @@
 package com.example.digikala.ui.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +33,7 @@ public class CategoryFragment extends Fragment {
 
     private FragmentCategoryBinding mBinding;
     private CategoryFragmentViewModel mViewModel;
-
+    private boolean isFirst = true;
     private SubCategoryListAdapter mDigitalAdapter;
     private SubCategoryListAdapter mHealthAdapter;
     private SubCategoryListAdapter mArtAdapter;
@@ -67,6 +71,19 @@ public class CategoryFragment extends Fragment {
         return mBinding.getRoot();
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (!isFirst){
+            setAdapter(mDigitalAdapter , HeadCategory.DIGITAL , mBinding.subDigitalRecycler);
+            setAdapter(mClothingAdapter , HeadCategory.FASHION_CLOTHING , mBinding.subClothingRecycler);
+            setAdapter(mArtAdapter , HeadCategory.BOOK_ART , mBinding.subBookArtRecycler);
+            setAdapter(mHealthAdapter , HeadCategory.HEALTH , mBinding.subHealthRecycler);
+            setAdapter(mMarketAdapter , HeadCategory.SUPER_MARKET , mBinding.subSuperMarketRecycler);
+            setAdapter(mSpecialSaleAdapter , HeadCategory.SPECIAL_SALE , mBinding.subSpecialSaleRecycler);
+        }
+    }
+
     public void setRecyclerLayout(RecyclerView recyclerView){
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext(),
@@ -83,6 +100,7 @@ public class CategoryFragment extends Fragment {
         mViewModel.getSubDigitalLiveData().observe(this, new Observer<List<Category>>() {
             @Override
             public void onChanged(List<Category> categories) {
+                isFirst = false;
                setAdapter(mDigitalAdapter , HeadCategory.DIGITAL , mBinding.subDigitalRecycler);
                 if (mViewModel.getSubDigitalLiveData().getValue().size()==0){
                     mBinding.textViewEmptyDigital.setVisibility(View.VISIBLE);
@@ -144,10 +162,16 @@ public class CategoryFragment extends Fragment {
         mViewModel.getCategorySubject().observe(this, new Observer<Category>() {
             @Override
             public void onChanged(Category category) {
-                startActivity(ProductListActivity.newIntent(getContext() , category.getId() , null));
+                Log.d("IDNumber" , category.getId()+"");
+                goToListFragment(ListType.NONE , category.getId());
             }
         });
     }
 
+    private void goToListFragment(ListType listType ,int categoryId){
+        CategoryFragmentDirections.ActionCategoryFragmentToProductListFragment action =
+                CategoryFragmentDirections.actionCategoryFragmentToProductListFragment(listType , categoryId);
+        Navigation.findNavController(mBinding.getRoot()).navigate(action);
+    }
 
 }

@@ -79,4 +79,6 @@ public abstract class ProductStrategyViewModel extends AndroidViewModel {
         getApplication().startActivity(intent);
     }
 
+
+
 }

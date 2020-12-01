@@ -14,9 +14,4 @@ public class BaseActivity extends SingleFragmentActivity {
         super.onCreate(savedInstanceState);
 
     }
-
-    @Override
-    public Fragment createFragment() {
-        return HomeFragment.newInstance();
-    }
 }
