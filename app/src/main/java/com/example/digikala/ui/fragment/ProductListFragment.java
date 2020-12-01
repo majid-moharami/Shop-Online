@@ -63,7 +63,7 @@ public class ProductListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Log.d("MAJID" , "INVOKE ONCREATE");
         //if user come from home fragment
-        ListType mListType = ProductListFragmentArgs.fromBundle(getArguments()).getListType();
+        mListType = ProductListFragmentArgs.fromBundle(getArguments()).getListType();
         if (mListType != null && mListType != ListType.NONE){
             switch (mListType){
                 case RECENT_PRODUCT:

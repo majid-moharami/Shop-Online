@@ -12,36 +12,25 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.digikala.R;
 import com.example.digikala.adapter.ProductListAdapter;
-import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.databinding.FragmentHomeBinding;
-import com.example.digikala.ui.activity.ProductDetailActivity;
-import com.example.digikala.ui.activity.ProductListActivity;
 import com.example.digikala.utillity.ListType;
-import com.example.digikala.utillity.ProductDiffUtil;
 import com.example.digikala.viewmodel.PopularProductViewModel;
 import com.example.digikala.viewmodel.ProductStrategyViewModel;
 import com.example.digikala.viewmodel.RatingProductViewModel;
 import com.example.digikala.viewmodel.RecentProductViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding mHomeBinding;
     private ProductStrategyViewModel mRecentViewModel;
     private ProductStrategyViewModel mPopularViewModel;
     private ProductStrategyViewModel mRatingViewModel;
-
     private ProductListAdapter mRecentProductAdapter;
     private ProductListAdapter mPopularProductAdapter;
     private ProductListAdapter mRatingProductAdapter;
@@ -72,11 +61,9 @@ public class HomeFragment extends Fragment {
         mHomeBinding.setRecentViewModel((RecentProductViewModel) mRecentViewModel);
         mHomeBinding.setPopularViewModel((PopularProductViewModel) mPopularViewModel);
         mHomeBinding.setRatingViewModel((RatingProductViewModel) mRatingViewModel);
+        mHomeBinding.setThisFragment(this);
         setFont();
-        //
         setRecyclerLayouts();
-        //getActivity().setActionBar(mHomeBinding.toolbar);
-        
         return mHomeBinding.getRoot();
     }
 
@@ -94,6 +81,7 @@ public class HomeFragment extends Fragment {
         mPopularProductAdapter = new ProductListAdapter(this, mPopularViewModel, ListType.POPULAR_PRODUCT);
         mRatingProductAdapter = new ProductListAdapter(this, mRatingViewModel, ListType.RATING_PRODUCT);
     }
+
     private void setFont() {
         Typeface typeFaceTitle = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Far_Casablanca.ttf");
         Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Far_Zar.ttf");
@@ -122,7 +110,6 @@ public class HomeFragment extends Fragment {
                         true));
     }
 
-
     private void observers() {
         mRecentViewModel.getProductLiveData().observe(this, products -> {
                 mRecentProductAdapter.notifyDataSetChanged();
@@ -148,10 +135,24 @@ public class HomeFragment extends Fragment {
         });
     }
 
-
     private void goToDetailFragment(int productId){
         HomeFragmentDirections.ActionHomeFragmentToProductDetailFragment action =
                 HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(productId);
+        Navigation.findNavController(mHomeBinding.getRoot()).navigate(action);
+    }
+
+    public void foToProductListFragment(int num){
+        HomeFragmentDirections.ActionHomeFragmentToProductListFragment action;
+        if (num == 1){
+         action =
+                HomeFragmentDirections.actionHomeFragmentToProductListFragment( ListType.RECENT_PRODUCT , -1);
+        }else if (num == 2){
+            action =
+                    HomeFragmentDirections.actionHomeFragmentToProductListFragment( ListType.POPULAR_PRODUCT , -1);
+        }else {
+            action =
+                    HomeFragmentDirections.actionHomeFragmentToProductListFragment( ListType.RATING_PRODUCT , -1);
+        }
         Navigation.findNavController(mHomeBinding.getRoot()).navigate(action);
     }
 }

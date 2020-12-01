@@ -16,6 +16,10 @@
         <variable
             name="RatingViewModel"
             type="com.example.digikala.viewmodel.RatingProductViewModel" />
+
+        <variable
+            name="thisFragment"
+            type="com.example.digikala.ui.fragment.HomeFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -48,7 +52,7 @@
                     <TextView
                         android:id="@+id/news_see_more_text"
                         style="@style/textViewSeeMore"
-                        android:onClick="@{()-> RecentViewModel.seeMoreRecentClick()}" />
+                        android:onClick="@{()-> thisFragment.foToProductListFragment(1)}" />
 
                     <TextView
                         android:id="@+id/textView_news_title"
@@ -74,7 +78,7 @@
                     <TextView
                         android:id="@+id/most_view_see_more_text"
                         style="@style/textViewSeeMore"
-                        android:onClick="@{()-> PopularViewModel.seeMorePopularClick()}" />
+                        android:onClick="@{()->  thisFragment.foToProductListFragment(2)}" />
 
                     <TextView
                         android:id="@+id/textView_popular_title"
@@ -100,7 +104,7 @@
                     <TextView
                         android:id="@+id/most_rate_see_more_text"
                         style="@style/textViewSeeMore"
-                        android:onClick="@{()-> RatingViewModel.seeMoreRatingClick()}" />
+                        android:onClick="@{()->  thisFragment.foToProductListFragment(3)}" />
 
                     <TextView
                         android:id="@+id/textView_rating_title"
