@@ -1,6 +1,5 @@
 package com.example.digikala.data.repository;
 
-import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
@@ -13,7 +12,6 @@ import com.example.digikala.utillity.ListType;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,16 +20,17 @@ import retrofit2.Retrofit;
 
 public class ProductRepository {
     private static ProductRepository sProductRepository;
-    private Context mContext;
     private WooCommerceService mCommerceService;
-    private Retrofit retrofit = RetrofitInstance.getInstance();
-    private Retrofit retrofitCategoryProducts = RetrofitInstance.getProductsOfCategory();
-    private Retrofit retrofitSingleProduct = RetrofitInstance.getInstanceSingleProduct();
+    private Retrofit mRetrofit = RetrofitInstance.getInstance();
+    private Retrofit mRetrofitCategoryProducts = RetrofitInstance.getProductsOfCategory();
+    private Retrofit mRetrofitSingleProduct = RetrofitInstance.getInstanceSingleProduct();
+    private Retrofit mRetrofitSearchProduct = RetrofitInstance.getProductsOfSearch();
 
     private MutableLiveData<List<Product>> mRecentProductLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mPopularProductLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mRatingProductLiveData = new MutableLiveData<>();
     private MutableLiveData<List<Product>> mProductCategoryLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<Product>> mProductsSearchResultLiveData = new MutableLiveData<>();
     private MutableLiveData<Product> mSingleProductLiveData = new MutableLiveData<>();
 
     private List<Product> mOldRecentProduct = new ArrayList<>();
@@ -49,7 +48,7 @@ public class ProductRepository {
     }
 
     public void fetchProducts(ListType listType, int page) {
-        mCommerceService = retrofit.create(WooCommerceService.class);
+        mCommerceService = mRetrofit.create(WooCommerceService.class);
         Call<List<Product>> listCall;
         switch (listType) {
             case RECENT_PRODUCT:
@@ -130,7 +129,7 @@ public class ProductRepository {
     }
 
     public void fetchCategoryProduct(int categoryId , int page){
-        mCommerceService = retrofitCategoryProducts.create(WooCommerceService.class);
+        mCommerceService = mRetrofitCategoryProducts.create(WooCommerceService.class);
         Call<List<Product>> listCall = mCommerceService.productListOfCategory(RequestParams.BASE_PARAM , categoryId , page);
         listCall.enqueue(new Callback<List<Product>>() {
             @Override
@@ -157,7 +156,7 @@ public class ProductRepository {
     }
 
     public void fetchProduct(String id) {
-        mCommerceService = retrofitSingleProduct.create(WooCommerceService.class);
+        mCommerceService = mRetrofitSingleProduct.create(WooCommerceService.class);
         Call<Product> productCall = mCommerceService.product(id, RequestParams.BASE_PARAM);
         productCall.enqueue(new Callback<Product>() {
             @Override
@@ -168,6 +167,32 @@ public class ProductRepository {
             @Override
             public void onFailure(Call<Product> call, Throwable t) {
                 Log.d("MAJID", t.toString(), t);
+            }
+        });
+    }
+
+    public void fetchSearchProducts(int page , String searchWord){
+        mCommerceService = mRetrofitSearchProduct.create(WooCommerceService.class);
+        Call<List<Product>> listCall = mCommerceService.searchProducts(RequestParams.BASE_PARAM, searchWord, page);
+        listCall.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful()){
+                    if (response.body().size()>0){
+                        if (page == 1){
+                            mProductsSearchResultLiveData.setValue(response.body());
+                        }else {
+                            List<Product> list = mProductsSearchResultLiveData.getValue();
+                            list.addAll(response.body());
+                            mProductsSearchResultLiveData.setValue(list);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+                Log.d("MAJID", t.toString() + "fetchSearchProducts", t);
             }
         });
     }
@@ -197,6 +222,10 @@ public class ProductRepository {
         return mSingleProductLiveData;
     }
 
+    public MutableLiveData<List<Product>> getProductsSearchResultLiveData(String word) {
+        fetchSearchProducts(1 , word);
+        return mProductsSearchResultLiveData;
+    }
 
     public List<Product> getOldRecentProduct() {
         return mOldRecentProduct;

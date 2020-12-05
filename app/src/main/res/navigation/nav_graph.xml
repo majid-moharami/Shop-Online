@@ -67,6 +67,18 @@
     <fragment
         android:id="@+id/nav_searchFragment"
         android:name="com.example.digikala.ui.fragment.SearchFragment"
-        android:label="SearchFragment" />
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_nav_searchFragment_to_searchResultFragment"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.example.digikala.ui.fragment.SearchResultFragment"
+        android:label="SearchResultFragment" >
+        <argument
+            android:name="searchWord"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

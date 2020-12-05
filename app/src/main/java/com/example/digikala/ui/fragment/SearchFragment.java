@@ -5,10 +5,12 @@ import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.example.digikala.R;
 import com.example.digikala.databinding.FragmentSearchBinding;
@@ -27,6 +29,20 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater , R.layout.fragment_search , container , false);
         mBinding.searchView.onActionViewExpanded();
+        mBinding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                SearchFragmentDirections.ActionNavSearchFragmentToSearchResultFragment action =
+                        SearchFragmentDirections.actionNavSearchFragmentToSearchResultFragment(query);
+                Navigation.findNavController(mBinding.getRoot()).navigate(action);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         return mBinding.getRoot();
     }
 }

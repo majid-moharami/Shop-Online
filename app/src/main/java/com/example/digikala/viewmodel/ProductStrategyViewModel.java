@@ -47,10 +47,16 @@ public abstract class ProductStrategyViewModel extends AndroidViewModel {
         return mProductLiveData.getValue().get(position);
     }
 
-
+    public Product getProduct(int position) {
+        return mProductLiveData.getValue().get(position);
+    }
 
     public void updateList(ListType listType, int page) {
         mProductRepository.fetchProducts(listType, page);
+    }
+
+    public void updateSearchList(int page , String searchWord){
+        mProductRepository.fetchSearchProducts(page , searchWord);
     }
 
     public void updateCategoryProductsList(int page) {

@@ -14,46 +14,34 @@ import com.bumptech.glide.Glide;
 import com.example.digikala.R;
 import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.databinding.ProductItemListBinding;
+import com.example.digikala.databinding.SearchListItemBinding;
 import com.example.digikala.utillity.ListType;
 import com.example.digikala.viewmodel.ProductStrategyViewModel;
 
 import java.util.List;
 
-public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.ProductHolder> {
+public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.ProductHolder> {
 
-    private List<Product> mProductList;
-    private LifecycleOwner mOwner;
-    private ListType mListType;
     private ProductStrategyViewModel mViewModel;
     private int mPage = 2;
+    private LifecycleOwner mOwner;
+    private String mWord;
 
-    public ProductListAdapter(
-            LifecycleOwner owner,
-            ProductStrategyViewModel viewModel,
-            ListType listType) {
-        mOwner = owner;
+    public SearchListAdapter(ProductStrategyViewModel viewModel , LifecycleOwner owner , String word) {
         mViewModel = viewModel;
-        mListType = listType;
+        mOwner = owner;
+        mWord = word;
     }
-//
-//    public List<Product> getProductList() {
-//        return mProductList;
-//    }
-//
-//    public void setProductList(List<Product> productList) {
-//        mProductList = productList;
-//    }
-
     @NonNull
     @Override
     public ProductHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ProductItemListBinding itemListBinding = DataBindingUtil.inflate(
+        SearchListItemBinding itemListBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(mViewModel.getApplication()),
-                R.layout.product_item_list,
+                R.layout.search_list_item,
                 parent,
                 false
         );
-        return new ProductHolder(itemListBinding);
+        return new SearchListAdapter.ProductHolder(itemListBinding);
     }
 
     @Override
@@ -61,10 +49,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         holder.onBind(position);
 
         if (position == mViewModel.getProductLiveData().getValue().size() - 1) {
-            mViewModel.updateList(mListType, mPage);
+            mViewModel.updateSearchList(mPage ,mWord);
             mPage++;
         }
-
     }
 
     @Override
@@ -80,14 +67,12 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     }
 
     class ProductHolder extends RecyclerView.ViewHolder {
-        private ProductItemListBinding mItemListBinding;
+        private SearchListItemBinding mItemListBinding;
 
-        public ProductHolder(ProductItemListBinding productItemListBinding) {
+        public ProductHolder(SearchListItemBinding productItemListBinding) {
             super(productItemListBinding.getRoot());
             mItemListBinding = productItemListBinding;
             mItemListBinding.setViewModel(mViewModel);
-            // mItemListBinding.setLifecycleOwner(mOwner);
-            mItemListBinding.setListType(mListType);
             Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets(), "fonts/Dirooz-FD.ttf");
             mItemListBinding.textViewProductName.setTypeface(typeFace);
             mItemListBinding.textViewProductPrice.setTypeface(typeFace);
