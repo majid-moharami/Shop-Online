@@ -62,6 +62,13 @@ public class HomeFragment extends Fragment {
         mHomeBinding.setPopularViewModel((PopularProductViewModel) mPopularViewModel);
         mHomeBinding.setRatingViewModel((RatingProductViewModel) mRatingViewModel);
         mHomeBinding.setThisFragment(this);
+        mHomeBinding.appBarLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(mHomeBinding.getRoot()).
+                        navigate(HomeFragmentDirections.actionNavHomeFragmentToSearchFragment());
+            }
+        });
         setFont();
         setRecyclerLayouts();
         return mHomeBinding.getRoot();

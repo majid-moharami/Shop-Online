@@ -12,8 +12,6 @@
         android:roundIcon="@mipmap/ic_shop_logo_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.ProductListActivity"></activity>
-        <activity android:name=".ui.activity.ProductDetailActivity" />
         <activity android:name=".ui.activity.BaseActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

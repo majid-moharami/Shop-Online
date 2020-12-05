@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_productListFragment"
             app:destination="@id/nav_productListFragment" />
+        <action
+            android:id="@+id/action_nav_homeFragment_to_searchFragment"
+            app:destination="@id/nav_searchFragment" />
 
     </fragment>
     <fragment
@@ -61,5 +64,9 @@
 
 
     </fragment>
+    <fragment
+        android:id="@+id/nav_searchFragment"
+        android:name="com.example.digikala.ui.fragment.SearchFragment"
+        android:label="SearchFragment" />
 
 </navigation>

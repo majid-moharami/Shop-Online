@@ -23,7 +23,6 @@ import com.example.digikala.adapter.CategoryProductListAdapter;
 import com.example.digikala.adapter.ProductListAdapter;
 import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.databinding.FragmentProductListBinding;
-import com.example.digikala.ui.activity.ProductDetailActivity;
 import com.example.digikala.utillity.CategoryListViewModelFactory;
 import com.example.digikala.utillity.ListType;
 
@@ -148,7 +147,9 @@ public class ProductListFragment extends Fragment {
         mViewModel.getProductSelectedLiveData().observe(this, new Observer<Product>() {
             @Override
             public void onChanged(Product product) {
-                startActivity(ProductDetailActivity.newIntent(getContext(), Integer.parseInt(product.getId())));
+                ProductListFragmentDirections.ActionProductListFragmentToProductDetailFragment action =
+                        ProductListFragmentDirections.actionProductListFragmentToProductDetailFragment(Integer.parseInt(product.getId()));
+                Navigation.findNavController(mBinding.getRoot()).navigate(action);
             }
         });
     }

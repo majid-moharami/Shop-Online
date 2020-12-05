@@ -28,7 +28,9 @@
         tools:context=".ui.fragment.HomeFragment">
 
 
-        <include layout="@layout/search_toolbar" />
+        <include
+            android:id="@+id/appBarLayout"
+            layout="@layout/search_toolbar" />
 
         <ScrollView
             android:layout_width="0dp"
