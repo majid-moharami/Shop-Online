@@ -2,15 +2,12 @@ package com.example.digikala.data.database.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "cart_product")
 public class CartProduct {
-
-    @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "Id")
-    private Long mId;
-
+    @PrimaryKey
     @ColumnInfo(name = "ProductId")
     private int mProductId;
 
@@ -20,13 +17,14 @@ public class CartProduct {
     @ColumnInfo(name = "Count")
     private int mCount;
 
-
-    public Long getId() {
-        return mId;
+    @Ignore
+    public CartProduct(int productId, String color, int count) {
+        mProductId = productId;
+        mColor = color;
+        mCount = count;
     }
 
-    public void setId(Long id) {
-        mId = id;
+    public CartProduct() {
     }
 
     public int getProductId() {

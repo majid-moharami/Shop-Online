@@ -1,8 +1,10 @@
 package com.example.digikala.data.database.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -16,10 +18,10 @@ public interface CartProductDBDao {
     @Query("select * from cart_product")
     List<CartProduct> getAll();
 
-    @Query("select * from cart_product where Id == :productId")
-    CartProduct getCartProductById(Long productId);
+    @Query("select * from cart_product where ProductId == :productId")
+    CartProduct getCartProductById(Integer productId);
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(CartProduct cartProduct);
 
     @Update
