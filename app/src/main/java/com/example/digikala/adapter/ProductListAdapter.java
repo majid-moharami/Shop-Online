@@ -96,6 +96,7 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         public void onBind(int position) {
             mItemListBinding.setPosition(position);
             mItemListBinding.executePendingBindings();
+
             String imageURL = null;
 
             imageURL = mViewModel.getProductLiveData().getValue().get(position).getImages().get(0).getImageURL();
