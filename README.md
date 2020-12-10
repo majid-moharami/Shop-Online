@@ -3,7 +3,7 @@
 This is a shop online app similar digikala.
  
 # Screenshots
-![shope-git](https://user-images.githubusercontent.com/68108673/99881197-90d59900-2c2d-11eb-8afe-7631aa7d3186.jpg)
+![PicsArt_12-10-02 33 07](https://user-images.githubusercontent.com/68108673/101764149-f8785900-3af4-11eb-81eb-bbb6f4845bfc.jpg)
 
 # Detial in code
 
