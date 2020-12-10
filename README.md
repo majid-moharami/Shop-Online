@@ -12,6 +12,8 @@ This is a shop online app similar digikala.
    - LiveData
    - DataBinding
    - ViewModel
+   - Rest api
+   - SQLite Database(Room)
    - SingleFragmentActivity
    - Bottom Navigation
    - NavigationComponent
