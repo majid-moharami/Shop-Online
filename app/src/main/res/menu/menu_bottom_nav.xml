@@ -17,7 +17,7 @@
         android:title="@string/grouping"
         />
     <item
-        android:id="@+id/nav_basketFragment"
+        android:id="@+id/fragment_basket"
         android:icon="@drawable/basket_selector"
         android:title="@string/shop_basket" />
 

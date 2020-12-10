@@ -16,15 +16,8 @@ import java.util.concurrent.Executors;
 @Database(entities = {CartProduct.class}, version = 1 , exportSchema = false)
 public abstract class CartProductDatabase extends RoomDatabase {
 
-    private static final String DATABASE_NAME = "cart_product.db";
-    public static ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(4);
+    public static final String DATABASE_NAME = "cart_product.db";
 
     public abstract CartProductDBDao getDao();
-
-    public static CartProductDatabase getDatabase(Context context){
-        return Room.databaseBuilder(context,
-                CartProductDatabase.class,
-                DATABASE_NAME).allowMainThreadQueries().build();
-    }
 
 }

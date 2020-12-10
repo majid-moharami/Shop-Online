@@ -30,9 +30,9 @@
             app:destination="@id/nav_productListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/nav_basketFragment"
+        android:id="@+id/fragment_basket_after_load"
         android:name="com.example.digikala.ui.fragment.BasketFragment"
-        android:label="fragment_basket"
+        android:label="fragment_basket2"
         tools:layout="@layout/fragment_basket" />
     <fragment
         android:id="@+id/nav_myDigikalaFragment"
@@ -79,6 +79,14 @@
         <argument
             android:name="searchWord"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_basket"
+        android:name="com.example.digikala.ui.fragment.CartProductLoadingFragment"
+        android:label="fragment_basket" >
+        <action
+            android:id="@+id/action_fragment_basket_to_fragment_basket_after_load"
+            app:destination="@id/fragment_basket_after_load" />
     </fragment>
 
 </navigation>
