@@ -14,6 +14,9 @@ This is a shop online app similar digikala.
    - ViewModel
    - SingleFragmentActivity
    - Bottom Navigation
+   - NavigationComponent
+   - search product
+   - Cart product and save in Room Database.
   
 2.Libraries Used
    - Retrofit
@@ -24,10 +27,9 @@ This is a shop online app similar digikala.
   
   
 # Soon (In the next two weeks)
-     - Using NavigationComponent 
-     - Using Splash Screen
-     - Using Paging
-     - search product
-     - basket tab for buying the product 
+     - Creating costomer
+     - post costomer to api
+     - using map to get costomer address
+     - using WorkManger for send notification to user
     
   
