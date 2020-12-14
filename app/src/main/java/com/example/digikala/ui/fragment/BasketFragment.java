@@ -1,6 +1,7 @@
 package com.example.digikala.ui.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,12 +12,14 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.digikala.R;
 import com.example.digikala.adapter.CartProductListAdapter;
 import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.databinding.FragmentBasketBinding;
+import com.example.digikala.utillity.State;
 import com.example.digikala.viewmodel.CartFragmentViewModel;
 
 import java.util.List;
@@ -37,8 +40,10 @@ public class BasketFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("BasketFragment", "onCreate");
         mViewModel = new ViewModelProvider(this).get(CartFragmentViewModel.class);
-        mAdapter = new CartProductListAdapter(mViewModel, this);
+        mViewModel.fetchAllProducts();
+        mAdapter = new CartProductListAdapter(mViewModel);
         observer();
     }
 
@@ -58,10 +63,23 @@ public class BasketFragment extends Fragment {
     }
 
     private void observer() {
-        mViewModel.getProducts().observe(this, new Observer<List<Product>>() {
+
+
+        mViewModel.getRequestState().observe(this, new Observer<State>() {
             @Override
-            public void onChanged(List<Product> products) {
-                mAdapter.notifyDataSetChanged();
+            public void onChanged(State state) {
+                if (state == State.NAVIGATE) {
+                    Log.d("CartProductLoadingFragment", state.toString());
+                    mBinding.progressBarLoadingFragment.setVisibility(View.GONE);
+                    mBinding.baseLayout.setVisibility(View.VISIBLE);
+
+                    mViewModel.getProducts().observe(BasketFragment.this, new Observer<List<Product>>() {
+                        @Override
+                        public void onChanged(List<Product> products) {
+                            mAdapter.notifyDataSetChanged();
+                        }
+                    });
+                }
             }
         });
     }

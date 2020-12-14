@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.digikala.R;
 import com.example.digikala.adapter.ProductListAdapter;
+import com.example.digikala.adapter.SliderVIPAdapter;
 import com.example.digikala.databinding.FragmentHomeBinding;
 import com.example.digikala.utillity.ListType;
 import com.example.digikala.viewmodel.PopularProductViewModel;
@@ -34,6 +35,7 @@ public class HomeFragment extends Fragment {
     private ProductListAdapter mRecentProductAdapter;
     private ProductListAdapter mPopularProductAdapter;
     private ProductListAdapter mRatingProductAdapter;
+    private SliderVIPAdapter mSliderVIPAdapter;
 
 
     public static HomeFragment newInstance() {
@@ -80,13 +82,14 @@ public class HomeFragment extends Fragment {
         mHomeBinding.newsProductRecycler.setAdapter(mRecentProductAdapter);
         mHomeBinding.mostReviewRecycler.setAdapter(mPopularProductAdapter);
         mHomeBinding.mostRateRecycler.setAdapter(mRatingProductAdapter);
-
+        mHomeBinding.imageSlider.setSliderAdapter(mSliderVIPAdapter);
     }
 
     private void initAdapter(){
         mRecentProductAdapter = new ProductListAdapter(this, mRecentViewModel, ListType.RECENT_PRODUCT);
         mPopularProductAdapter = new ProductListAdapter(this, mPopularViewModel, ListType.POPULAR_PRODUCT);
         mRatingProductAdapter = new ProductListAdapter(this, mRatingViewModel, ListType.RATING_PRODUCT);
+        mSliderVIPAdapter = new SliderVIPAdapter(getContext());
     }
 
     private void setFont() {

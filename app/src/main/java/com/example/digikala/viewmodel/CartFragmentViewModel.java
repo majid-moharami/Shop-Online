@@ -27,6 +27,7 @@ import retrofit2.Retrofit;
 public class CartFragmentViewModel extends AndroidViewModel {
 
     private CartProductDBRepository mCartProductDBRepository;
+    private LiveData<List<Product>> mListLiveData;
 
     public CartFragmentViewModel(@NonNull Application application) {
         super(application);

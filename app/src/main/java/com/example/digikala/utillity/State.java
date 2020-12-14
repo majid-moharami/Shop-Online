@@ -1,5 +1,5 @@
 package com.example.digikala.utillity;
 
 public enum  State {
-    NAVIGATE,ERROR,LOADING;
+    NAVIGATE,ERROR,LOADING,NONE;
 }

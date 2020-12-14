@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,14 +25,14 @@ public class CartProductLoadingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d("CartProductLoadingFragment" , "onCreate");
         mViewModel = new ViewModelProvider(this).get(CartFragmentViewModel.class);
         mViewModel.fetchAllProducts();
         mViewModel.getRequestState().observe(this, new Observer<State>() {
             @Override
             public void onChanged(State state) {
                 if (state == State.NAVIGATE){
-                    Navigation.findNavController(getView())
-                            .navigate(CartProductLoadingFragmentDirections.actionFragmentBasketToFragmentBasketAfterLoad());
+                    Log.d("CartProductLoadingFragment" , state.toString());
                 }
             }
         });
@@ -40,6 +41,7 @@ public class CartProductLoadingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d("CartProductLoadingFragment" , "onCreateView");
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_cart_product_loading, container, false);
         return mBinding.getRoot();

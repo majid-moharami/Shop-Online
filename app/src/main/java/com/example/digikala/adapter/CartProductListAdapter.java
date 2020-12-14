@@ -24,12 +24,12 @@ public class CartProductListAdapter extends RecyclerView.Adapter<CartProductList
 
     private List<CartProduct> mCartProductList = new ArrayList<>();
     private LiveData<List<Product>> mProductLiveData;
-    private LifecycleOwner mOwner;
+   // private LifecycleOwner mOwner;
     private CartFragmentViewModel mViewModel;
-    public CartProductListAdapter(CartFragmentViewModel viewModel, LifecycleOwner owner) {
+    public CartProductListAdapter(CartFragmentViewModel viewModel) {
         mViewModel = viewModel;
         mCartProductList = viewModel.getCartProducts();
-        mOwner = owner;
+       // mOwner = owner;
     }
 
     @NonNull
@@ -51,7 +51,7 @@ public class CartProductListAdapter extends RecyclerView.Adapter<CartProductList
 
     @Override
     public int getItemCount() {
-        return mCartProductList.size();
+        return mViewModel.getCartProducts().size();
     }
 
     class CartProductHolder extends RecyclerView.ViewHolder {
