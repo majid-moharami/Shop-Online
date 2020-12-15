@@ -60,7 +60,7 @@ public class CartProductListAdapter extends RecyclerView.Adapter<CartProductList
         public CartProductHolder(CartProductItemBinding cartProductItemBinding) {
             super(cartProductItemBinding.getRoot());
             mBinding = cartProductItemBinding;
-            //mBinding.setViewModel(mViewModel);
+            mBinding.setViewModel(mViewModel);
 
             //set font
             Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets(), "fonts/Dirooz-FD.ttf");
@@ -74,16 +74,16 @@ public class CartProductListAdapter extends RecyclerView.Adapter<CartProductList
         }
 
         public void onBind2(int position) {
-//            mBinding.setPosition(position);
-//            mBinding.executePendingBindings();
+            mBinding.setPosition(position);
+            mBinding.executePendingBindings();
 
             String imageURL = null;
             imageURL =mViewModel.getProducts().getValue().get(position).getImages().get(0).getImageURL();
             Glide.with(mViewModel.getApplication()).load(imageURL).into(mBinding.imageViewProduct);
 
-            mBinding.textViewPrice.setText(mViewModel.getProduct(position).getPriceToman());
-            mBinding.textViewProductCount.setText(String.valueOf(mViewModel.getCartProduct(position).getCount()));
-            mBinding.textViewProductName.setText(mViewModel.getProduct(position).getName());
+            //mBinding.textViewPrice.setText(mViewModel.getProduct(position).getPriceToman());
+            //mBinding.textViewProductCount.setText(String.valueOf(mViewModel.getCartProduct(position).getCount()));
+            //mBinding.textViewProductName.setText(mViewModel.getProduct(position).getName());
         }
     }
 

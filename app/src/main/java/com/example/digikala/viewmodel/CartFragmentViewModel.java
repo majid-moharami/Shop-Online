@@ -45,12 +45,12 @@ public class CartFragmentViewModel extends AndroidViewModel {
     }
 
     public CartProduct getCartProduct(int position) {
-        return mCartProductDBRepository.getCartProductList().get(position);
+        return mCartProductDBRepository.getAllCartProduct().get(position);
     }
 
 
     public List<CartProduct> getCartProducts() {
-        return mCartProductDBRepository.getCartProductList();
+        return mCartProductDBRepository.getAllCartProduct();
     }
 
     public LiveData<List<Product>> getProducts() {

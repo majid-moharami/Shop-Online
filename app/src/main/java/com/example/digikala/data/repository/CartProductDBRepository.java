@@ -27,7 +27,6 @@ public class CartProductDBRepository {
     private CartProductDatabase mDatabase;
     private Retrofit mRetrofitSingleProduct = RetrofitInstance.getInstanceSingleProduct();
     private WooCommerceService mCommerceService;
-    private List<CartProduct> mCartProductList = new ArrayList<>();
     private MutableLiveData<List<Product>> mProductLiveData = new MutableLiveData<>();
     private MutableLiveData<State> mStateMutableLiveData = new MutableLiveData<>();
 
@@ -42,11 +41,9 @@ public class CartProductDBRepository {
                 CartProductDatabase.class,
                 CartProductDatabase.DATABASE_NAME).allowMainThreadQueries().build();
         mCommerceService = mRetrofitSingleProduct.create(WooCommerceService.class);
-        mCartProductList = getAllCartProduct();
     }
 
     public void insert(CartProduct cartProduct) {
-
         mDatabase.getDao().insert(cartProduct);
     }
 
@@ -105,8 +102,5 @@ public class CartProductDBRepository {
     public MutableLiveData<State> getStateMutableLiveData() {
         return mStateMutableLiveData;
     }
-
-    public List<CartProduct> getCartProductList() {
-        return mCartProductList;
-    }
+    
 }
