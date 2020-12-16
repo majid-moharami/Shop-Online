@@ -106,7 +106,7 @@
                         android:gravity="center|end"
                         android:paddingStart="16dp"
                         android:paddingEnd="16dp"
-                        android:text="3,890,000 تومان"
+                        android:text="0 تومان"
                         android:textColor="#101010"
                         android:textStyle="bold" />
                 </LinearLayout>

@@ -48,12 +48,15 @@ public class CartProductDBRepository {
     }
 
     public void update(CartProduct cartProduct) {
-
         mDatabase.getDao().update(cartProduct);
+       // mStateMutableLiveData.setValue(State.LOADING);
+        fetchAllProduct();
     }
 
     public void delete(CartProduct cartProduct) {
         mDatabase.getDao().delete(cartProduct);
+        mStateMutableLiveData.setValue(State.LOADING);
+        fetchAllProduct();
     }
 
     public List<CartProduct> getAllCartProduct() {
@@ -66,8 +69,12 @@ public class CartProductDBRepository {
 
     public void fetchAllProduct() {
         List<Product> list = new ArrayList<>();
+        if (getAllCartProduct().size()==0){
+            mStateMutableLiveData.setValue(State.NAVIGATE);
+            return;
+         //   mStateMutableLiveData.setValue(State.NONE);
+        }
         for (int i = 0; i < getAllCartProduct().size(); i++) {
-
             String id = String.valueOf(getAllCartProduct().get(i).getProductId());
 
             Call<Product> productCall = mCommerceService.product(id, RequestParams.BASE_PARAM);
@@ -94,6 +101,8 @@ public class CartProductDBRepository {
 
         Log.d("LIST", "fetchAll");
     }
+
+
 
     public MutableLiveData<List<Product>> getProductLiveData() {
         return mProductLiveData;

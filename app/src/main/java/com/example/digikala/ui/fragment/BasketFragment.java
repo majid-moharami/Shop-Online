@@ -19,6 +19,7 @@ import com.example.digikala.R;
 import com.example.digikala.adapter.CartProductListAdapter;
 import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.databinding.FragmentBasketBinding;
+import com.example.digikala.utillity.DeleteProductHelper;
 import com.example.digikala.utillity.State;
 import com.example.digikala.viewmodel.CartFragmentViewModel;
 
@@ -43,7 +44,7 @@ public class BasketFragment extends Fragment {
         Log.d("BasketFragment", "onCreate");
         mViewModel = new ViewModelProvider(this).get(CartFragmentViewModel.class);
         mViewModel.fetchAllProducts();
-        mAdapter = new CartProductListAdapter(mViewModel);
+        mAdapter = new CartProductListAdapter(mViewModel, this);
         observer();
     }
 
@@ -72,14 +73,30 @@ public class BasketFragment extends Fragment {
                     Log.d("CartProductLoadingFragment", state.toString());
                     mBinding.progressBarLoadingFragment.setVisibility(View.GONE);
                     mBinding.baseLayout.setVisibility(View.VISIBLE);
-
                     mViewModel.getProducts().observe(BasketFragment.this, new Observer<List<Product>>() {
                         @Override
                         public void onChanged(List<Product> products) {
                             mAdapter.notifyDataSetChanged();
+                            mBinding.textViewAllProductPrice.setText(mViewModel.calculateAllPrice(products)+" تومان ");
                         }
                     });
+                    /*because repository is alive and next time that we go to this fragment the
+                    repository is alive, we set state NONE to get the default station.*/
+                    mViewModel.setState(State.NONE);
                 }
+
+                if (state == State.LOADING){
+                    mBinding.progressBarLoadingFragment.setVisibility(View.VISIBLE);
+                    mBinding.baseLayout.setVisibility(View.GONE);
+                    mViewModel.setState(State.NONE);
+                }
+            }
+        });
+
+        mViewModel.getDeleteProductHelperMutableLiveData().observe(this, new Observer<DeleteProductHelper>() {
+            @Override
+            public void onChanged(DeleteProductHelper deleteProductHelper) {
+
             }
         });
     }

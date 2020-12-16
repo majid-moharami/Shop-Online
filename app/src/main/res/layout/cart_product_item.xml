@@ -195,6 +195,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="@{()->viewModel.deleteCartProduct(position)}"
                 app:srcCompat="@drawable/ic_delete_product" />
 
             <TextView
@@ -212,6 +213,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:onClick="@{()->viewModel.onUpdateDatabase(position)}"
                 app:srcCompat="@drawable/ic_plus_product" />
         </LinearLayout>
 

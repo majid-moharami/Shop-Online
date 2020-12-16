@@ -64,6 +64,10 @@ public class Product {
         }else return "0";
     }
 
+    public String basePrice(){
+        return mPrice;
+    }
+
     public String getPriceToman(){
         return getPrice() + " تومان ";
     }
