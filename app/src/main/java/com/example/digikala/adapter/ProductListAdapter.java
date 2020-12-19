@@ -88,9 +88,9 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
             mItemListBinding.setViewModel(mViewModel);
             // mItemListBinding.setLifecycleOwner(mOwner);
             mItemListBinding.setListType(mListType);
-            Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets(), "fonts/Dirooz-FD.ttf");
-            mItemListBinding.textViewProductName.setTypeface(typeFace);
-            mItemListBinding.textViewProductPrice.setTypeface(typeFace);
+//            Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets(), "font/Dirooz-FD.ttf");
+//            mItemListBinding.textViewProductName.setTypeface(typeFace);
+//            mItemListBinding.textViewProductPrice.setTypeface(typeFace);
         }
 
         public void onBind(int position) {

@@ -8,6 +8,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="news">جدیدترین ها</string>
     <string name="see_more">مشاهده همه</string>
+    <string name="login_sentence">برای ورود و با ثبت نام در دیجی کالا پست الکترونیکی خود را وارد نمایید</string>
+    <string name="digi_login_rules">با ورود یا ثبت نام در دیجی‌کالا شما شرایط و قوانین استفاده از سرویس های سایت دیجی‌کالا و قوانین حریم خصوصی آن را می پذیرید.</string>
     <string name="most_view">پر بازدیدترین ها</string>
     <string name="most_rate">بیشترین امتیاز</string>
     <string name="about_product">درباره کالا</string>

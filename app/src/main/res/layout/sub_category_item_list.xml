@@ -49,14 +49,15 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 android:layout_weight="1"
+                android:fontFamily="@font/far_yekan"
                 android:gravity="center"
                 android:inputType="textMultiLine"
                 android:maxLines="4"
                 android:padding="4dp"
+                android:text="@{viewModel.getCategory(position, categoryType).name}"
                 android:textColor="#000000"
                 android:textSize="14sp"
                 tools:ignore="TextViewEdits"
-                android:text="@{viewModel.getCategory(position, categoryType).name}"
                 tools:text="تلوریون" />
         </LinearLayout>
 

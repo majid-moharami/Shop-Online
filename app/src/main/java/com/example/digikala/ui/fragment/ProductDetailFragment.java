@@ -4,8 +4,6 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
@@ -18,7 +16,6 @@ import android.view.ViewGroup;
 
 import com.example.digikala.R;
 import com.example.digikala.adapter.SliderAdapter;
-import com.example.digikala.data.database.entity.CartProduct;
 import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.databinding.FragmentProductDetailBinding;
 import com.example.digikala.viewmodel.DetailFragmentViewModel;
@@ -65,9 +62,9 @@ public class ProductDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_product_detail, container, false);
-        Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets(), "fonts/Dirooz-FD.ttf");
-        mBinding.textViewProductName.setTypeface(typeFace);
-        mBinding.textViewProductDescription.setTypeface(typeFace);
+//        Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets(), "font/Dirooz-FD.ttf");
+//        mBinding.textViewProductName.setTypeface(typeFace);
+//        mBinding.textViewProductDescription.setTypeface(typeFace);
         mBinding.buttonAddToBasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

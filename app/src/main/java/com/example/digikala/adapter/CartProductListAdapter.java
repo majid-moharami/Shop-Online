@@ -65,14 +65,14 @@ public class CartProductListAdapter extends RecyclerView.Adapter<CartProductList
             mBinding.setViewModel(mViewModel);
 
             //set font
-            Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets(), "fonts/Dirooz-FD.ttf");
-            mBinding.textViewProductName.setTypeface(typeFace);
-            mBinding.textView2.setTypeface(typeFace);
-            mBinding.textView3.setTypeface(typeFace);
-            mBinding.textView6.setTypeface(typeFace);
-            mBinding.textView5.setTypeface(typeFace);
-            mBinding.textViewPrice.setTypeface(typeFace);
-            mBinding.textViewProductCount.setTypeface(typeFace);
+//            Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets(), "font/Dirooz-FD.ttf");
+//            mBinding.textViewProductName.setTypeface(typeFace);
+//            mBinding.textView2.setTypeface(typeFace);
+//            mBinding.textView3.setTypeface(typeFace);
+//            mBinding.textView6.setTypeface(typeFace);
+//            mBinding.textView5.setTypeface(typeFace);
+//            mBinding.textViewPrice.setTypeface(typeFace);
+//            mBinding.textViewProductCount.setTypeface(typeFace);
 
             mViewModel.getDeleteProductHelperMutableLiveData().observe(mOwner, new Observer<DeleteProductHelper>() {
                 @Override

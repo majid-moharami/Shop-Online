@@ -2,7 +2,6 @@ package com.example.digikala.adapter;
 
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -79,8 +78,8 @@ public class SubCategoryListAdapter extends RecyclerView.Adapter<SubCategoryList
             mItemListBinding.setViewModel(mViewModel);
             mItemListBinding.setCategoryType(mCategoryType);
 
-            Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets() , "fonts/Dirooz-FD.ttf");
-            mItemListBinding.textViewCategoryName.setTypeface(typeFace);
+//            Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets() , "font/Dirooz-FD.ttf");
+//            mItemListBinding.textViewCategoryName.setTypeface(typeFace);
         }
 
         public void onBind(int position){

@@ -5,6 +5,8 @@
         <item name="colorPrimary">#FFFFFF</item>
         <item name="colorPrimaryDark">#F4F4F4</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="colorControlNormal">#838383</item>
+        <item name="colorControlActivated">#D50000</item>
     </style>
 
     <style name="textViewTitle" >

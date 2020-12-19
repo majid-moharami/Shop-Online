@@ -1,6 +1,5 @@
 package com.example.digikala.ui.fragment;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -93,14 +92,14 @@ public class HomeFragment extends Fragment {
     }
 
     private void setFont() {
-        Typeface typeFaceTitle = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Far_Casablanca.ttf");
-        Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Far_Zar.ttf");
-        mHomeBinding.textViewNewsTitle.setTypeface(typeFaceTitle);
-        mHomeBinding.textViewPopularTitle.setTypeface(typeFaceTitle);
-        mHomeBinding.textViewRatingTitle.setTypeface(typeFaceTitle);
-        mHomeBinding.newsSeeMoreText.setTypeface(typeFace);
-        mHomeBinding.mostViewSeeMoreText.setTypeface(typeFace);
-        mHomeBinding.mostRateSeeMoreText.setTypeface(typeFace);
+//        Typeface typeFaceTitle = Typeface.createFromAsset(getActivity().getAssets(), "font/Far_Casablanca.ttf");
+//        Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(), "font/Far_Zar.ttf");
+//        mHomeBinding.textViewNewsTitle.setTypeface(typeFaceTitle);
+//        mHomeBinding.textViewPopularTitle.setTypeface(typeFaceTitle);
+//        mHomeBinding.textViewRatingTitle.setTypeface(typeFaceTitle);
+//        mHomeBinding.newsSeeMoreText.setTypeface(typeFace);
+//        mHomeBinding.mostViewSeeMoreText.setTypeface(typeFace);
+//        mHomeBinding.mostRateSeeMoreText.setTypeface(typeFace);
     }
 
     private void setRecyclerLayouts() {

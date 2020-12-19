@@ -30,7 +30,10 @@
 
         <include
             android:id="@+id/appBarLayout"
-            layout="@layout/search_toolbar" />
+            layout="@layout/search_toolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <ScrollView
@@ -80,7 +83,9 @@
                     <TextView
                         android:id="@+id/textView_news_title"
                         style="@style/textViewTitle"
-                        android:text="@string/news" />
+                        android:fontFamily="@font/dirooz_fd"
+                        android:text="@string/news"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -106,6 +111,8 @@
                     <TextView
                         android:id="@+id/textView_popular_title"
                         style="@style/textViewTitle"
+                        android:fontFamily="@font/dirooz_fd"
+                        android:textStyle="bold"
                         android:text="@string/most_view" />
 
                 </LinearLayout>
@@ -132,6 +139,8 @@
                     <TextView
                         android:id="@+id/textView_rating_title"
                         style="@style/textViewTitle"
+                        android:fontFamily="@font/dirooz_fd"
+                        android:textStyle="bold"
                         android:text="@string/most_rate" />
 
                 </LinearLayout>

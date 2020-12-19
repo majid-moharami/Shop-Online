@@ -13,9 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.digikala.R;
 import com.example.digikala.data.model.poduct.Product;
-import com.example.digikala.databinding.ProductItemListBinding;
 import com.example.digikala.databinding.SearchListItemBinding;
-import com.example.digikala.utillity.ListType;
 import com.example.digikala.viewmodel.ProductStrategyViewModel;
 
 import java.util.List;
@@ -73,9 +71,9 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchListAdapter.Pr
             super(productItemListBinding.getRoot());
             mItemListBinding = productItemListBinding;
             mItemListBinding.setViewModel(mViewModel);
-            Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets(), "fonts/Dirooz-FD.ttf");
-            mItemListBinding.textViewProductName.setTypeface(typeFace);
-            mItemListBinding.textViewProductPrice.setTypeface(typeFace);
+//            Typeface typeFace = Typeface.createFromAsset(mViewModel.getApplication().getAssets(), "font/Dirooz-FD.ttf");
+//            mItemListBinding.textViewProductName.setTypeface(typeFace);
+//            mItemListBinding.textViewProductPrice.setTypeface(typeFace);
         }
 
         public void onBind(int position) {

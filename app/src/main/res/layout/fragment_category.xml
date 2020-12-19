@@ -32,15 +32,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center|right"
                     android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/Digital_see_more_text"
-                        style="@style/textViewSeeMore" />
 
                     <TextView
                         android:id="@+id/textView_Digital_title"
                         style="@style/textViewTitle"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/dirooz_fd"
                         android:text="@string/Digital" />
 
                 </LinearLayout>
@@ -75,15 +74,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center|right"
                     android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/SpecialSale_see_more_text"
-                        style="@style/textViewSeeMore" />
 
                     <TextView
                         android:id="@+id/SpecialSale_Clothing_title"
                         style="@style/textViewTitle"
+                        android:fontFamily="@font/dirooz_fd"
                         android:text="@string/SpecialSale" />
 
                 </LinearLayout>
@@ -118,15 +115,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center|right"
                     android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/Clothing_see_more_text"
-                        style="@style/textViewSeeMore" />
 
                     <TextView
                         android:id="@+id/textView_Clothing_title"
                         style="@style/textViewTitle"
+                        android:fontFamily="@font/dirooz_fd"
                         android:text="@string/Clothing" />
 
                 </LinearLayout>
@@ -161,15 +156,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center|right"
                     android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/SuperMarket_see_more_text"
-                        style="@style/textViewSeeMore" />
 
                     <TextView
                         android:id="@+id/SuperMarket_Clothing_title"
                         style="@style/textViewTitle"
+                        android:fontFamily="@font/dirooz_fd"
                         android:text="@string/SuperMarket" />
 
                 </LinearLayout>
@@ -204,15 +197,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center|right"
                     android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/BookArt_see_more_text"
-                        style="@style/textViewSeeMore" />
 
                     <TextView
                         android:id="@+id/BookArt_Clothing_title"
                         style="@style/textViewTitle"
+                        android:fontFamily="@font/dirooz_fd"
                         android:text="@string/BookArt" />
 
                 </LinearLayout>
@@ -247,15 +238,13 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center|right"
                     android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/Health_see_more_text"
-                        style="@style/textViewSeeMore" />
 
                     <TextView
                         android:id="@+id/textView_Health_title"
                         style="@style/textViewTitle"
+                        android:fontFamily="@font/dirooz_fd"
                         android:text="@string/Health" />
 
                 </LinearLayout>
