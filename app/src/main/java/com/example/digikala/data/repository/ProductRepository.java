@@ -9,8 +9,10 @@ import com.example.digikala.data.network.parameter.RequestParams;
 import com.example.digikala.data.network.retrofit.RetrofitInstance;
 import com.example.digikala.data.network.retrofit.WooCommerceService;
 import com.example.digikala.utillity.ListType;
+import com.example.digikala.utillity.State;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import retrofit2.Call;
@@ -20,22 +22,25 @@ import retrofit2.Retrofit;
 
 public class ProductRepository {
     private static ProductRepository sProductRepository;
-    private WooCommerceService mCommerceService;
-    private Retrofit mRetrofit = RetrofitInstance.getInstance();
-    private Retrofit mRetrofitCategoryProducts = RetrofitInstance.getProductsOfCategory();
-    private Retrofit mRetrofitSingleProduct = RetrofitInstance.getInstanceSingleProduct();
-    private Retrofit mRetrofitSearchProduct = RetrofitInstance.getProductsOfSearch();
+    private final Retrofit mRetrofit = RetrofitInstance.getInstance();
+    private WooCommerceService mCommerceService=mRetrofit.create(WooCommerceService.class);
+    private final Retrofit mRetrofitCategoryProducts = RetrofitInstance.getProductsOfCategory();
+    private final Retrofit mRetrofitSingleProduct = RetrofitInstance.getInstanceSingleProduct();
+    private final Retrofit mRetrofitSearchProduct = RetrofitInstance.getProductsOfSearch();
 
-    private MutableLiveData<List<Product>> mRecentProductLiveData = new MutableLiveData<>();
-    private MutableLiveData<List<Product>> mPopularProductLiveData = new MutableLiveData<>();
-    private MutableLiveData<List<Product>> mRatingProductLiveData = new MutableLiveData<>();
-    private MutableLiveData<List<Product>> mProductCategoryLiveData = new MutableLiveData<>();
-    private MutableLiveData<List<Product>> mProductsSearchResultLiveData = new MutableLiveData<>();
-    private MutableLiveData<Product> mSingleProductLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<Product>> mRecentProductLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<Product>> mPopularProductLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<Product>> mRatingProductLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<Product>> mProductCategoryLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<Product>> mProductsSearchResultLiveData = new MutableLiveData<>();
+    private final MutableLiveData<Product> mSingleProductLiveData = new MutableLiveData<>();
+    private final MutableLiveData<List<State>> mProductStateLiveData = new MutableLiveData<>();
 
-    private List<Product> mOldRecentProduct = new ArrayList<>();
-    private List<Product> mOldPopularProduct = new ArrayList<>();
-    private List<Product> mOldRatingProduct = new ArrayList<>();
+    private final List<Product> mOldRecentProduct = new ArrayList<>();
+    private final List<Product> mOldPopularProduct = new ArrayList<>();
+    private final List<Product> mOldRatingProduct = new ArrayList<>();
+    ArrayList<State> mProductStateList =
+            new ArrayList<State>(Arrays.asList(State.LOADING, State.LOADING, State.LOADING));
 
     public static ProductRepository getInstance() {
         if (sProductRepository == null)
@@ -45,87 +50,102 @@ public class ProductRepository {
 
     public ProductRepository() {
         //mContext = context.getApplicationContext();
+
     }
 
     public void fetchProducts(ListType listType, int page) {
-        mCommerceService = mRetrofit.create(WooCommerceService.class);
-        Call<List<Product>> listCall;
         switch (listType) {
             case RECENT_PRODUCT:
-                listCall = mCommerceService.listAllProduct(RequestParams.BASE_PARAM, page);
-                listCall.enqueue(new Callback<List<Product>>() {
-                    @Override
-                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                        if (response.isSuccessful()){
-                            if (response.body().size()>0){
-                                if (page == 1){
-                                    mRecentProductLiveData.setValue(response.body());
-                                }else {
-                                    List<Product> list = mRecentProductLiveData.getValue();
-                                    list.addAll(response.body());
-                                    mRecentProductLiveData.setValue(list);
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Product>> call, Throwable t) {
-
-                    }
-                });
+               fetchRecentProduct(page);
                 break;
             case POPULAR_PRODUCT:
-                listCall = mCommerceService.listAllProduct(RequestParams.POPULAR_PRODUCT, page);
-                listCall.enqueue(new Callback<List<Product>>() {
-                    @Override
-                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                        if (response.isSuccessful()){
-                            assert response.body() != null;
-                            if (response.body().size()>0){
-                                if (page == 1){
-                                    mPopularProductLiveData.setValue(response.body());
-                                }else {
-                                    List<Product> list = mPopularProductLiveData.getValue();
-                                    list.addAll(response.body());
-                                    mPopularProductLiveData.setValue(list);
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Product>> call, Throwable t) {
-
-                    }
-                });
+                fetchPopularProduct(page);
                 break;
             case RATING_PRODUCT:
-                listCall = mCommerceService.listAllProduct(RequestParams.RATING_PRODUCT, page);
-                listCall.enqueue(new Callback<List<Product>>() {
-                    @Override
-                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                        if (response.isSuccessful()){
-                            assert response.body() != null;
-                            if (response.body().size()>0){
-                                if (page == 1){
-                                    mRatingProductLiveData.setValue(response.body());
-                                }else {
-                                    List<Product> list = mRatingProductLiveData.getValue();
-                                    list.addAll(response.body());
-                                    mRatingProductLiveData.setValue(list);
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Product>> call, Throwable t) {
-
-                    }
-                });
+                fetchRatingProduct(page);
                 break;
         }
+    }
+
+    private void fetchRecentProduct(int page){
+        Call<List<Product>> listCall;
+        listCall = mCommerceService.listAllProduct(RequestParams.BASE_PARAM, page);
+        listCall.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful()){
+                    if (response.body().size()>0){
+                        if (page == 1){
+                            mRecentProductLiveData.setValue(response.body());
+                        }else {
+                            List<Product> list = mRecentProductLiveData.getValue();
+                            list.addAll(response.body());
+                            mRecentProductLiveData.setValue(list);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void fetchPopularProduct(int page){
+        Call<List<Product>> listCall;
+        listCall = mCommerceService.listAllProduct(RequestParams.POPULAR_PRODUCT, page);
+        listCall.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful()){
+                    assert response.body() != null;
+                    if (response.body().size()>0){
+                        if (page == 1){
+                            mPopularProductLiveData.setValue(response.body());
+                        }else {
+                            List<Product> list = mPopularProductLiveData.getValue();
+                            list.addAll(response.body());
+                            mPopularProductLiveData.setValue(list);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void fetchRatingProduct(int page){
+        Call<List<Product>> listCall;
+        listCall = mCommerceService.listAllProduct(RequestParams.RATING_PRODUCT, page);
+        listCall.enqueue(new Callback<List<Product>>() {
+            @Override
+            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                if (response.isSuccessful()){
+                    assert response.body() != null;
+                    if (response.body().size()>0){
+                        if (page == 1){
+                            mRatingProductLiveData.setValue(response.body());
+                        }else {
+                            List<Product> list = mRatingProductLiveData.getValue();
+                            list.addAll(response.body());
+                            mRatingProductLiveData.setValue(list);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Product>> call, Throwable t) {
+
+            }
+        });
     }
 
     public void fetchCategoryProduct(int categoryId , int page){

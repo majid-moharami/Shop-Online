@@ -8,10 +8,8 @@ import androidx.databinding.DataBindingUtil;
 
 import com.bumptech.glide.Glide;
 import com.example.digikala.R;
-import com.example.digikala.data.model.ProductImage;
-import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.databinding.SliderItemBinding;
-import com.example.digikala.utillity.ImageHelper;
+import com.example.digikala.utillity.ImageConverterResource;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.util.ArrayList;
@@ -26,7 +24,8 @@ public class SliderVIPAdapter extends
 
     public SliderVIPAdapter(Context context) {
         mContext = context;
-        stringsResource = ImageHelper.getAllImage();
+        ImageConverterResource imageConverterResource = new ImageConverterResource();
+        stringsResource = imageConverterResource.getAllImage();
     }
 
     @Override

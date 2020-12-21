@@ -22,8 +22,6 @@ public class CartFragmentViewModel extends AndroidViewModel {
     private CartProductDBRepository mCartProductDBRepository;
     private LiveData<List<Product>> mListLiveData;
     private MutableLiveData<DeleteProductHelper> mDeleteProductHelperMutableLiveData = new MutableLiveData<>();
-    private MutableLiveData<Boolean> mBooleanMutableLiveData = new MutableLiveData<>();
-    private int mPosition;
 
     public CartFragmentViewModel(@NonNull Application application) {
         super(application);

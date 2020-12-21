@@ -12,7 +12,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.example.digikala.R;
@@ -69,7 +68,7 @@ public class BasketFragment extends Fragment {
         mViewModel.getRequestState().observe(this, new Observer<State>() {
             @Override
             public void onChanged(State state) {
-                if (state == State.NAVIGATE) {
+                if (state == State.FINISH_LOADING) {
                     Log.d("CartProductLoadingFragment", state.toString());
                     mBinding.progressBarLoadingFragment.setVisibility(View.GONE);
                     mBinding.baseLayout.setVisibility(View.VISIBLE);
