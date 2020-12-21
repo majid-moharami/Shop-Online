@@ -22,137 +22,154 @@
             type="com.example.digikala.ui.fragment.HomeFragment" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.fragment.HomeFragment">
+        android:layout_height="match_parent">
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/progressBar_loading_fragment"
+            style="@style/AVLoadingIndicatorView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            app:indicatorColor="#858585"
+            app:indicatorName="BallPulseIndicator" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/product_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:context=".ui.fragment.HomeFragment">
 
 
-        <include
-            android:id="@+id/appBarLayout"
-            layout="@layout/search_toolbar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <include
+                android:id="@+id/appBarLayout"
+                layout="@layout/search_toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        <ScrollView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-
-                <com.smarteist.autoimageslider.SliderView
-                    android:id="@+id/image_slider"
-                    android:layout_width="match_parent"
-                    android:layout_height="260dp"
-                    app:sliderAnimationDuration="600"
-                    app:sliderAutoCycleDirection="left"
-                    app:sliderAutoCycleEnabled="true"
-                    app:sliderIndicatorAnimationDuration="600"
-                    app:sliderIndicatorGravity="bottom|center_horizontal|left"
-                    app:sliderIndicatorMargin="15dp"
-                    app:sliderIndicatorOrientation="horizontal"
-                    app:sliderIndicatorPadding="3dp"
-                    app:sliderIndicatorRadius="2dp"
-                    app:sliderIndicatorSelectedColor="#5A5A5A"
-                    app:sliderIndicatorUnselectedColor="#4A807D7D"
-                    app:sliderScrollTimeInSec="2"
-                    app:sliderStartAutoCycle="true" />
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/news_see_more_text"
-                        style="@style/textViewSeeMore"
-                        android:onClick="@{()-> thisFragment.foToProductListFragment(1)}" />
-
-                    <TextView
-                        android:id="@+id/textView_news_title"
-                        style="@style/textViewTitle"
-                        android:fontFamily="@font/dirooz_fd"
-                        android:text="@string/news"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/news_product_recycler"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="#DD0451"
                     android:orientation="vertical">
 
-                </androidx.recyclerview.widget.RecyclerView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    <com.smarteist.autoimageslider.SliderView
+                        android:id="@+id/image_slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="260dp"
+                        app:sliderAnimationDuration="600"
+                        app:sliderAutoCycleDirection="left"
+                        app:sliderAutoCycleEnabled="true"
+                        app:sliderIndicatorAnimationDuration="600"
+                        app:sliderIndicatorGravity="bottom|center_horizontal|left"
+                        app:sliderIndicatorMargin="15dp"
+                        app:sliderIndicatorOrientation="horizontal"
+                        app:sliderIndicatorPadding="3dp"
+                        app:sliderIndicatorRadius="2dp"
+                        app:sliderIndicatorSelectedColor="#5A5A5A"
+                        app:sliderIndicatorUnselectedColor="#4A807D7D"
+                        app:sliderScrollTimeInSec="2"
+                        app:sliderStartAutoCycle="true" />
 
-                    <TextView
-                        android:id="@+id/most_view_see_more_text"
-                        style="@style/textViewSeeMore"
-                        android:onClick="@{()->  thisFragment.foToProductListFragment(2)}" />
 
-                    <TextView
-                        android:id="@+id/textView_popular_title"
-                        style="@style/textViewTitle"
-                        android:fontFamily="@font/dirooz_fd"
-                        android:textStyle="bold"
-                        android:text="@string/most_view" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
 
+                        <TextView
+                            android:id="@+id/news_see_more_text"
+                            style="@style/textViewSeeMore"
+                            android:onClick="@{()-> thisFragment.foToProductListFragment(1)}" />
+
+                        <TextView
+                            android:id="@+id/textView_news_title"
+                            style="@style/textViewTitle"
+                            android:fontFamily="@font/dirooz_fd"
+                            android:text="@string/news"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/news_product_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="#DD0451"
+                        android:orientation="vertical">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/most_view_see_more_text"
+                            style="@style/textViewSeeMore"
+                            android:onClick="@{()->  thisFragment.foToProductListFragment(2)}" />
+
+                        <TextView
+                            android:id="@+id/textView_popular_title"
+                            style="@style/textViewTitle"
+                            android:fontFamily="@font/dirooz_fd"
+                            android:text="@string/most_view"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/most_review_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#61CF04"
+                        android:orientation="horizontal">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/most_rate_see_more_text"
+                            style="@style/textViewSeeMore"
+                            android:onClick="@{()->  thisFragment.foToProductListFragment(3)}" />
+
+                        <TextView
+                            android:id="@+id/textView_rating_title"
+                            style="@style/textViewTitle"
+                            android:fontFamily="@font/dirooz_fd"
+                            android:text="@string/most_rate"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/most_rate_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#1F5CC3"
+                        android:orientation="horizontal" />
                 </LinearLayout>
+            </ScrollView>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/most_review_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#61CF04"
-                    android:orientation="horizontal">
-
-                </androidx.recyclerview.widget.RecyclerView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/most_rate_see_more_text"
-                        style="@style/textViewSeeMore"
-                        android:onClick="@{()->  thisFragment.foToProductListFragment(3)}" />
-
-                    <TextView
-                        android:id="@+id/textView_rating_title"
-                        style="@style/textViewTitle"
-                        android:fontFamily="@font/dirooz_fd"
-                        android:textStyle="bold"
-                        android:text="@string/most_rate" />
-
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/most_rate_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#1F5CC3"
-                    android:orientation="horizontal" />
-            </LinearLayout>
-        </ScrollView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>
