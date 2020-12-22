@@ -9,6 +9,7 @@ import com.example.digikala.data.network.parameter.RequestParams;
 import com.example.digikala.data.network.retrofit.RetrofitInstance;
 import com.example.digikala.data.network.retrofit.WooCommerceService;
 import com.example.digikala.utillity.ListType;
+import com.example.digikala.utillity.State;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +34,14 @@ public class ProductRepository {
     private MutableLiveData<List<Product>> mProductsSearchResultLiveData = new MutableLiveData<>();
     private MutableLiveData<Product> mSingleProductLiveData = new MutableLiveData<>();
 
+    private final MutableLiveData<State> mLoadingHomeFragmentStateLiveData = new MutableLiveData<>();
+
     private List<Product> mOldRecentProduct = new ArrayList<>();
     private List<Product> mOldPopularProduct = new ArrayList<>();
     private List<Product> mOldRatingProduct = new ArrayList<>();
+    private State mStateRecentProduct = State.LOADING;
+    private State mStateRatingProduct = State.LOADING;
+    private State mStatePopularProduct = State.LOADING;
 
     public static ProductRepository getInstance() {
         if (sProductRepository == null)
@@ -47,6 +53,7 @@ public class ProductRepository {
         //mContext = context.getApplicationContext();
     }
 
+
     public void fetchProducts(ListType listType, int page) {
         mCommerceService = mRetrofit.create(WooCommerceService.class);
         Call<List<Product>> listCall;
@@ -56,15 +63,17 @@ public class ProductRepository {
                 listCall.enqueue(new Callback<List<Product>>() {
                     @Override
                     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                        if (response.isSuccessful()){
-                            if (response.body().size()>0){
-                                if (page == 1){
+                        if (response.isSuccessful()) {
+                            if (response.body().size() > 0) {
+                                if (page == 1) {
                                     mRecentProductLiveData.setValue(response.body());
-                                }else {
+                                } else {
                                     List<Product> list = mRecentProductLiveData.getValue();
                                     list.addAll(response.body());
                                     mRecentProductLiveData.setValue(list);
                                 }
+                                mStateRecentProduct = State.NAVIGATE;
+                                setHomeFragmentState();
                             }
                         }
                     }
@@ -80,16 +89,18 @@ public class ProductRepository {
                 listCall.enqueue(new Callback<List<Product>>() {
                     @Override
                     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             assert response.body() != null;
-                            if (response.body().size()>0){
-                                if (page == 1){
+                            if (response.body().size() > 0) {
+                                if (page == 1) {
                                     mPopularProductLiveData.setValue(response.body());
-                                }else {
+                                } else {
                                     List<Product> list = mPopularProductLiveData.getValue();
                                     list.addAll(response.body());
                                     mPopularProductLiveData.setValue(list);
                                 }
+                                mStatePopularProduct = State.NAVIGATE;
+                                setHomeFragmentState();
                             }
                         }
                     }
@@ -105,16 +116,18 @@ public class ProductRepository {
                 listCall.enqueue(new Callback<List<Product>>() {
                     @Override
                     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                        if (response.isSuccessful()){
+                        if (response.isSuccessful()) {
                             assert response.body() != null;
-                            if (response.body().size()>0){
-                                if (page == 1){
+                            if (response.body().size() > 0) {
+                                if (page == 1) {
                                     mRatingProductLiveData.setValue(response.body());
-                                }else {
+                                } else {
                                     List<Product> list = mRatingProductLiveData.getValue();
                                     list.addAll(response.body());
                                     mRatingProductLiveData.setValue(list);
                                 }
+                                mStateRatingProduct = State.NAVIGATE;
+                                setHomeFragmentState();
                             }
                         }
                     }
@@ -169,6 +182,12 @@ public class ProductRepository {
                 Log.d("MAJID", t.toString(), t);
             }
         });
+    }
+    private void setHomeFragmentState() {
+        if (mStateRecentProduct == State.NAVIGATE && mStatePopularProduct == State.NAVIGATE &&
+                mStateRatingProduct == State.NAVIGATE) {
+            mLoadingHomeFragmentStateLiveData.setValue(State.NAVIGATE);
+        }
     }
 
     public void fetchSearchProducts(int page , String searchWord){
@@ -249,5 +268,8 @@ public class ProductRepository {
 
     public void updateOldRatingProduct(List<Product> oldRatingProduct) {
         mOldRatingProduct.addAll(oldRatingProduct);
+    }
+    public MutableLiveData<State> getLoadingHomeFragmentStateLiveData() {
+        return mLoadingHomeFragmentStateLiveData;
     }
 }

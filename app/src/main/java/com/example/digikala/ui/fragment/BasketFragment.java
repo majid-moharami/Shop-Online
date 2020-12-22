@@ -68,7 +68,7 @@ public class BasketFragment extends Fragment {
         mViewModel.getRequestState().observe(this, new Observer<State>() {
             @Override
             public void onChanged(State state) {
-                if (state == State.FINISH_LOADING) {
+                if (state == State.NAVIGATE) {
                     Log.d("CartProductLoadingFragment", state.toString());
                     mBinding.progressBarLoadingFragment.setVisibility(View.GONE);
                     mBinding.baseLayout.setVisibility(View.VISIBLE);

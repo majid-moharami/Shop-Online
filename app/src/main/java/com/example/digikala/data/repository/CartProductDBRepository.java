@@ -70,7 +70,7 @@ public class CartProductDBRepository {
     public void fetchAllProduct() {
         List<Product> list = new ArrayList<>();
         if (getAllCartProduct().size()==0){
-            mStateMutableLiveData.setValue(State.FINISH_LOADING);
+            mStateMutableLiveData.setValue(State.NAVIGATE);
             return;
          //   mStateMutableLiveData.setValue(State.NONE);
         }
@@ -84,7 +84,7 @@ public class CartProductDBRepository {
                     if (response.isSuccessful()) {
                         list.add(response.body());
                         if (getAllCartProduct().size() == list.size()) {
-                            mStateMutableLiveData.setValue(State.FINISH_LOADING);
+                            mStateMutableLiveData.setValue(State.NAVIGATE);
                             mProductLiveData.setValue(list);
                         }
                         mStateMutableLiveData.setValue(State.NONE);
