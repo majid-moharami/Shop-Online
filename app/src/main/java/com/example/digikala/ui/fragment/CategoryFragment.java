@@ -22,6 +22,7 @@ import com.example.digikala.data.model.category.Category;
 import com.example.digikala.databinding.FragmentCategoryBinding;
 import com.example.digikala.utillity.HeadCategory;
 import com.example.digikala.utillity.ListType;
+import com.example.digikala.utillity.State;
 import com.example.digikala.viewmodel.CategoryFragmentViewModel;
 
 import java.util.List;
@@ -49,6 +50,7 @@ public class CategoryFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(CategoryFragmentViewModel.class);
+        mViewModel.checkNetWork();
         observers();
     }
 
@@ -65,6 +67,12 @@ public class CategoryFragment extends Fragment {
         setRecyclerLayout(mBinding.subBookArtRecycler);
         setRecyclerLayout(mBinding.subSuperMarketRecycler);
         setRecyclerLayout(mBinding.subClothingRecycler);
+        mBinding.textViewNoNet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mViewModel.fetchAllSubCategory();
+            }
+        });
         return mBinding.getRoot();
     }
 
@@ -72,6 +80,8 @@ public class CategoryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         if (!isFirst){
+            mBinding.categoryRoot.setVisibility(View.VISIBLE);
+            mBinding.progressBarLoadingFragment.setVisibility(View.GONE);
             setAdapter(mDigitalAdapter , HeadCategory.DIGITAL , mBinding.subDigitalRecycler);
             setAdapter(mClothingAdapter , HeadCategory.FASHION_CLOTHING , mBinding.subClothingRecycler);
             setAdapter(mArtAdapter , HeadCategory.BOOK_ART , mBinding.subBookArtRecycler);
@@ -97,7 +107,6 @@ public class CategoryFragment extends Fragment {
         mViewModel.getSubDigitalLiveData().observe(this, new Observer<List<Category>>() {
             @Override
             public void onChanged(List<Category> categories) {
-                isFirst = false;
                setAdapter(mDigitalAdapter , HeadCategory.DIGITAL , mBinding.subDigitalRecycler);
                 if (mViewModel.getSubDigitalLiveData().getValue().size()==0){
                     mBinding.textViewEmptyDigital.setVisibility(View.VISIBLE);
@@ -161,6 +170,24 @@ public class CategoryFragment extends Fragment {
             public void onChanged(Category category) {
                 Log.d("IDNumber" , category.getId()+"");
                 goToListFragment(ListType.NONE , category.getId());
+            }
+        });
+        mViewModel.getFragmentState().observe(this , state -> {
+            if (state == State.NAVIGATE){
+                mBinding.categoryRoot.setVisibility(View.VISIBLE);
+                mBinding.progressBarLoadingFragment.setVisibility(View.GONE);
+                mBinding.textViewNoNet.setVisibility(View.GONE);
+                isFirst = false;
+                mViewModel.setStateFragment(State.LOADING);
+            }
+        });
+        mViewModel.getIsNetworkLiveData().observe(this , aBoolean -> {
+            if (!aBoolean){
+                mBinding.categoryRoot.setVisibility(View.GONE);
+                mBinding.progressBarLoadingFragment.setVisibility(View.VISIBLE);
+                mBinding.textViewNoNet.setVisibility(View.VISIBLE);
+            }else {
+                mBinding.textViewNoNet.setVisibility(View.GONE);
             }
         });
     }

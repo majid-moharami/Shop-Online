@@ -8,6 +8,7 @@ import com.example.digikala.data.network.parameter.RequestParams;
 import com.example.digikala.data.network.retrofit.RetrofitInstance;
 import com.example.digikala.data.network.retrofit.WooCommerceService;
 import com.example.digikala.utillity.HeadCategory;
+import com.example.digikala.utillity.State;
 
 import java.util.List;
 
@@ -22,12 +23,20 @@ public class CategoriesRepository {
     private WooCommerceService mCommerceService;
     private Retrofit mRetrofit = RetrofitInstance.getInstanceSubCategories();
 
-    private MutableLiveData<List<Category>> mSubDigitalCategory = new MutableLiveData<>();
-    private MutableLiveData<List<Category>> mSubSpecialSaleCategory = new MutableLiveData<>();
-    private MutableLiveData<List<Category>> mSubArtCategory = new MutableLiveData<>();
-    private MutableLiveData<List<Category>> mSubMarketCategory = new MutableLiveData<>();
-    private MutableLiveData<List<Category>> mSubHealthCategory = new MutableLiveData<>();
-    private MutableLiveData<List<Category>> mSubClothingCategory = new MutableLiveData<>();
+    private final MutableLiveData<List<Category>> mSubDigitalCategory = new MutableLiveData<>();
+    private final MutableLiveData<List<Category>> mSubSpecialSaleCategory = new MutableLiveData<>();
+    private final MutableLiveData<List<Category>> mSubArtCategory = new MutableLiveData<>();
+    private final MutableLiveData<List<Category>> mSubMarketCategory = new MutableLiveData<>();
+    private final MutableLiveData<List<Category>> mSubHealthCategory = new MutableLiveData<>();
+    private final MutableLiveData<List<Category>> mSubClothingCategory = new MutableLiveData<>();
+    private final MutableLiveData<State> mLoadingCategoryFragmentStateLiveData = new MutableLiveData<>();
+
+    private State mStateDigitalCategory= State.LOADING;
+    private State mStateSpecialCategory = State.LOADING;
+    private State mStateArtCategory= State.LOADING;
+    private State mStateMarketCategory = State.LOADING;
+    private State mStateHealthCategory = State.LOADING;
+    private State mStateClothingCategory = State.LOADING;
 
     public static CategoriesRepository getInstance(){
         if (sCategoriesRepository == null)
@@ -49,21 +58,33 @@ public class CategoriesRepository {
                 switch (headCategory){
                     case DIGITAL:
                         mSubDigitalCategory.setValue(response.body());
+                        mStateDigitalCategory = State.NAVIGATE;
+                        setCategoryFragmentState();
                         break;
                     case HEALTH:
                         mSubHealthCategory.setValue(response.body());
+                        mStateHealthCategory = State.NAVIGATE;
+                        setCategoryFragmentState();
                         break;
                     case SPECIAL_SALE:
                         mSubSpecialSaleCategory.setValue(response.body());
+                        mStateSpecialCategory = State.NAVIGATE;
+                        setCategoryFragmentState();
                         break;
                     case SUPER_MARKET:
                         mSubMarketCategory.setValue(response.body());
+                        mStateMarketCategory= State.NAVIGATE;
+                        setCategoryFragmentState();
                         break;
                     case BOOK_ART:
                         mSubArtCategory.setValue(response.body());
+                        mStateArtCategory= State.NAVIGATE;
+                        setCategoryFragmentState();
                         break;
                     case FASHION_CLOTHING:
                         mSubClothingCategory.setValue(response.body());
+                        mStateClothingCategory= State.NAVIGATE;
+                        setCategoryFragmentState();
                         break;
                 }
             }
@@ -73,6 +94,14 @@ public class CategoriesRepository {
 
             }
         });
+    }
+
+    private void setCategoryFragmentState() {
+        if (mStateDigitalCategory == State.NAVIGATE && mStateArtCategory == State.NAVIGATE &&
+                mStateClothingCategory == State.NAVIGATE && mStateHealthCategory == State.NAVIGATE &&
+                mStateMarketCategory == State.NAVIGATE && mStateSpecialCategory == State.NAVIGATE) {
+            mLoadingCategoryFragmentStateLiveData.setValue(State.NAVIGATE);
+        }
     }
 
     //list getter setter----------------------------------------------------------------------------
@@ -99,5 +128,10 @@ public class CategoriesRepository {
     public MutableLiveData<List<Category>> getSubClothingCategory() {
         return mSubClothingCategory;
     }
+
+    public MutableLiveData<State> getLoadingCategoryFragmentStateLiveData() {
+        return mLoadingCategoryFragmentStateLiveData;
+    }
+
     //----------------------------------------------------------------------------------------------
 }

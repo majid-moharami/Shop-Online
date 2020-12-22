@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.data.repository.ProductRepository;
 import com.example.digikala.utillity.ListType;
+import com.example.digikala.utillity.State;
 
 import java.util.List;
 
@@ -65,6 +66,14 @@ public abstract class ProductStrategyViewModel extends AndroidViewModel {
 
     public void onItemSelected(int position, ListType listType) {
         mProductSelectedLiveData.setValue(mProductLiveData.getValue().get(position));
+    }
+
+    public LiveData<State> getFragmentState(){
+        return mProductRepository.getLoadingHomeFragmentStateLiveData();
+    }
+
+    public void setFragmentState(State state){
+        mProductRepository.getLoadingHomeFragmentStateLiveData().setValue(state);
     }
 
 }

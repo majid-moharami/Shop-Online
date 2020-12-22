@@ -21,6 +21,7 @@ import com.example.digikala.adapter.ProductListAdapter;
 import com.example.digikala.adapter.SliderVIPAdapter;
 import com.example.digikala.databinding.FragmentHomeBinding;
 import com.example.digikala.utillity.ListType;
+import com.example.digikala.utillity.State;
 import com.example.digikala.viewmodel.PopularProductViewModel;
 import com.example.digikala.viewmodel.ProductStrategyViewModel;
 import com.example.digikala.viewmodel.RatingProductViewModel;
@@ -35,6 +36,7 @@ public class HomeFragment extends Fragment {
     private ProductListAdapter mPopularProductAdapter;
     private ProductListAdapter mRatingProductAdapter;
     private SliderVIPAdapter mSliderVIPAdapter;
+    private boolean mNeedToLoad = true;
 
 
     public static HomeFragment newInstance() {
@@ -70,7 +72,6 @@ public class HomeFragment extends Fragment {
                         navigate(HomeFragmentDirections.actionNavHomeFragmentToSearchFragment());
             }
         });
-        setFont();
         setRecyclerLayouts();
         return mHomeBinding.getRoot();
     }
@@ -78,6 +79,10 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (!mNeedToLoad){
+            mHomeBinding.productRoot.setVisibility(View.VISIBLE);
+            mHomeBinding.progressBarLoadingFragment.setVisibility(View.GONE);
+        }
         mHomeBinding.newsProductRecycler.setAdapter(mRecentProductAdapter);
         mHomeBinding.mostReviewRecycler.setAdapter(mPopularProductAdapter);
         mHomeBinding.mostRateRecycler.setAdapter(mRatingProductAdapter);
@@ -89,17 +94,6 @@ public class HomeFragment extends Fragment {
         mPopularProductAdapter = new ProductListAdapter(this, mPopularViewModel, ListType.POPULAR_PRODUCT);
         mRatingProductAdapter = new ProductListAdapter(this, mRatingViewModel, ListType.RATING_PRODUCT);
         mSliderVIPAdapter = new SliderVIPAdapter(getContext());
-    }
-
-    private void setFont() {
-//        Typeface typeFaceTitle = Typeface.createFromAsset(getActivity().getAssets(), "font/Far_Casablanca.ttf");
-//        Typeface typeFace = Typeface.createFromAsset(getActivity().getAssets(), "font/Far_Zar.ttf");
-//        mHomeBinding.textViewNewsTitle.setTypeface(typeFaceTitle);
-//        mHomeBinding.textViewPopularTitle.setTypeface(typeFaceTitle);
-//        mHomeBinding.textViewRatingTitle.setTypeface(typeFaceTitle);
-//        mHomeBinding.newsSeeMoreText.setTypeface(typeFace);
-//        mHomeBinding.mostViewSeeMoreText.setTypeface(typeFace);
-//        mHomeBinding.mostRateSeeMoreText.setTypeface(typeFace);
     }
 
     private void setRecyclerLayouts() {
@@ -141,6 +135,15 @@ public class HomeFragment extends Fragment {
         });
         mRatingViewModel.getProductSelectedLiveData().observe(this,  product ->{
                 goToDetailFragment(Integer.parseInt(product.getId()));
+        });
+
+        mRecentViewModel.getFragmentState().observe(this , state -> {
+            if (state == State.NAVIGATE){
+                mHomeBinding.productRoot.setVisibility(View.VISIBLE);
+                mHomeBinding.progressBarLoadingFragment.setVisibility(View.GONE);
+                mNeedToLoad=false;
+                mRecentViewModel.setFragmentState(State.LOADING);
+            }
         });
     }
 
