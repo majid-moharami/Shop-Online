@@ -2,276 +2,303 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.fragment.CategoryFragment">
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/include2"
-            layout="@layout/search_toolbar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView_no_net"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/far_yekan"
+            android:text="@string/no_net"
+            android:textColor="#121111"
+            android:visibility="gone" />
 
-        <ScrollView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/include2">
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/progressBar_loading_fragment"
+            style="@style/AVLoadingIndicatorView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            app:indicatorColor="#FF1744"
+            app:indicatorName="BallPulseIndicator" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/category_root"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            tools:context=".ui.fragment.CategoryFragment">
 
+            <include
+                android:id="@+id/include2"
+                layout="@layout/search_toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ScrollView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/include2">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center|right"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|right"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView_Digital_title"
+                            style="@style/textViewTitle"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/dirooz_fd"
+                            android:text="@string/Digital" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/sub_digital_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
 
                     <TextView
-                        android:id="@+id/textView_Digital_title"
-                        style="@style/textViewTitle"
+                        android:id="@+id/textView_empty_Digital"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/dirooz_fd"
-                        android:text="@string/Digital" />
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/btn_add_basket_background"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/no_sub_category"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
-                </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/sub_digital_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|right"
+                        android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView_empty_Digital"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/btn_add_basket_background"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="@string/no_sub_category"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
+                        <TextView
+                            android:id="@+id/SpecialSale_Clothing_title"
+                            style="@style/textViewTitle"
+                            android:fontFamily="@font/dirooz_fd"
+                            android:text="@string/SpecialSale" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/listDivider" />
+                    </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center|right"
-                    android:orientation="horizontal">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/sub_specialSale_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
 
                     <TextView
-                        android:id="@+id/SpecialSale_Clothing_title"
-                        style="@style/textViewTitle"
-                        android:fontFamily="@font/dirooz_fd"
-                        android:text="@string/SpecialSale" />
+                        android:id="@+id/textView_empty_special_sale"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/btn_add_basket_background"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/no_sub_category"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
-                </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/sub_specialSale_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|right"
+                        android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView_empty_special_sale"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/btn_add_basket_background"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="@string/no_sub_category"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
+                        <TextView
+                            android:id="@+id/textView_Clothing_title"
+                            style="@style/textViewTitle"
+                            android:fontFamily="@font/dirooz_fd"
+                            android:text="@string/Clothing" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/listDivider" />
+                    </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center|right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView_Clothing_title"
-                        style="@style/textViewTitle"
-                        android:fontFamily="@font/dirooz_fd"
-                        android:text="@string/Clothing" />
-
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/sub_clothing_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
-
-                <TextView
-                    android:id="@+id/textView_empty_clothing"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/btn_add_basket_background"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="@string/no_sub_category"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/listDivider" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center|right"
-                    android:orientation="horizontal">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/sub_clothing_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
 
                     <TextView
-                        android:id="@+id/SuperMarket_Clothing_title"
-                        style="@style/textViewTitle"
-                        android:fontFamily="@font/dirooz_fd"
-                        android:text="@string/SuperMarket" />
+                        android:id="@+id/textView_empty_clothing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/btn_add_basket_background"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/no_sub_category"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
-                </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/sub_SuperMarket_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|right"
+                        android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView_empty_super_market"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/btn_add_basket_background"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="@string/no_sub_category"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
+                        <TextView
+                            android:id="@+id/SuperMarket_Clothing_title"
+                            style="@style/textViewTitle"
+                            android:fontFamily="@font/dirooz_fd"
+                            android:text="@string/SuperMarket" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/listDivider" />
+                    </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center|right"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/BookArt_Clothing_title"
-                        style="@style/textViewTitle"
-                        android:fontFamily="@font/dirooz_fd"
-                        android:text="@string/BookArt" />
-
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/sub_BookArt_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
-
-                <TextView
-                    android:id="@+id/textView_empty_art"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/btn_add_basket_background"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="@string/no_sub_category"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/listDivider" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center|right"
-                    android:orientation="horizontal">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/sub_SuperMarket_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
 
                     <TextView
-                        android:id="@+id/textView_Health_title"
-                        style="@style/textViewTitle"
-                        android:fontFamily="@font/dirooz_fd"
-                        android:text="@string/Health" />
+                        android:id="@+id/textView_empty_super_market"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/btn_add_basket_background"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/no_sub_category"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|right"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/BookArt_Clothing_title"
+                            style="@style/textViewTitle"
+                            android:fontFamily="@font/dirooz_fd"
+                            android:text="@string/BookArt" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/sub_BookArt_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
+
+                    <TextView
+                        android:id="@+id/textView_empty_art"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/btn_add_basket_background"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/no_sub_category"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center|right"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textView_Health_title"
+                            style="@style/textViewTitle"
+                            android:fontFamily="@font/dirooz_fd"
+                            android:text="@string/Health" />
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/sub_Health_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
+
+                    <TextView
+                        android:id="@+id/textView_empty_health"
+                        android:layout_width="wrap_content"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/btn_add_basket_background"
+                        android:gravity="center"
+                        android:padding="10dp"
+                        android:text="@string/no_sub_category"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
                 </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/sub_Health_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"></androidx.recyclerview.widget.RecyclerView>
-
-                <TextView
-                    android:id="@+id/textView_empty_health"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/btn_add_basket_background"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="@string/no_sub_category"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:visibility="gone" />
-
-            </LinearLayout>
-        </ScrollView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
 </layout>

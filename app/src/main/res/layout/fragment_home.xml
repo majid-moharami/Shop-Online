@@ -25,6 +25,16 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textView_no_net"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/far_yekan"
+            android:text="@string/no_net"
+            android:textColor="#121111"
+            android:visibility="gone" />
 
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/progressBar_loading_fragment"
@@ -33,7 +43,7 @@
             android:layout_height="30dp"
             android:layout_gravity="center"
             android:visibility="visible"
-            app:indicatorColor="#858585"
+            app:indicatorColor="#FF1744"
             app:indicatorName="BallPulseIndicator" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
