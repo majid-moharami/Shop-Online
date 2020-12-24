@@ -62,6 +62,13 @@ public class RetrofitInstance {
                 .build();
     }
 
+    public static Retrofit registerCustomer(){
+        return new Retrofit.Builder()
+                .baseUrl(RequestParams.CUSTOMER_CREATE_PATH)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
+
     private static Converter.Factory createGsonConverter(Type type , Object typeAdapter){
         GsonBuilder gsonBuilder = new GsonBuilder().registerTypeAdapter(type , typeAdapter);
         Gson gson = gsonBuilder.create();

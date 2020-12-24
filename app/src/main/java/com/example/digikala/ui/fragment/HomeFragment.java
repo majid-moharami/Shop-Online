@@ -19,6 +19,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.digikala.R;
 import com.example.digikala.adapter.ProductListAdapter;
 import com.example.digikala.adapter.SliderVIPAdapter;
+import com.example.digikala.data.model.customer.Billing;
+import com.example.digikala.data.model.customer.Customer;
+import com.example.digikala.data.model.customer.Shipping;
+import com.example.digikala.data.repository.CustomerRepository;
 import com.example.digikala.databinding.FragmentHomeBinding;
 import com.example.digikala.utillity.ListType;
 import com.example.digikala.utillity.State;
@@ -141,6 +145,13 @@ public class HomeFragment extends Fragment {
             if (state == State.NAVIGATE){
                 mHomeBinding.productRoot.setVisibility(View.VISIBLE);
                 mHomeBinding.progressBarLoadingFragment.setVisibility(View.GONE);
+                CustomerRepository customerRepository = CustomerRepository.INSTANCE;
+                customerRepository.postCustomer(new Customer("majid","majj","moharami",
+                        "fcr7m",new Billing("dcvsc","dcvsc","dcvsc","dcvsc","dcvsc",
+                        "dcvsc","dcvsc","dcvsc","dcvsc","dcvsc","dcvsc"),new Shipping(
+                        "dcvsc","dcvsc","dcvsc","dcvsc",
+                        "dcvsc","dcvsc","dcvsc","dcvsc","dcvsc"
+                )));
                 mNeedToLoad=false;
                 mRecentViewModel.setFragmentState(State.LOADING);
             }
