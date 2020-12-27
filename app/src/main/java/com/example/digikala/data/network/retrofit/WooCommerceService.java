@@ -3,6 +3,7 @@ package com.example.digikala.data.network.retrofit;
 import com.example.digikala.data.model.customer.Customer;
 import com.example.digikala.data.model.poduct.Product;
 import com.example.digikala.data.model.category.Category;
+import com.example.digikala.data.network.parameter.RequestParams;
 
 import java.util.List;
 import java.util.Map;
@@ -38,6 +39,6 @@ public interface WooCommerceService {
             @Query("category") int category,
             @Query("page") int page);
 
-    @POST(".")
+    @POST(RequestParams.CUSTOMER_CREATE_PATH)
     Call<Customer> registerCustomer(@Body Customer customer);
 }

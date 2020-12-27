@@ -64,7 +64,7 @@ public class RetrofitInstance {
 
     public static Retrofit registerCustomer(){
         return new Retrofit.Builder()
-                .baseUrl(RequestParams.CUSTOMER_CREATE_PATH)
+                .baseUrl(RequestParams.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

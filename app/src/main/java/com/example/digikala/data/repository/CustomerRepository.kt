@@ -11,29 +11,32 @@ import retrofit2.Retrofit
 
 object CustomerRepository {
 
-    private var mRetrofit : Retrofit = RetrofitInstance.registerCustomer()
-    private var mWooCommerceService : WooCommerceService = mRetrofit.create(WooCommerceService::class.java)
-//    companion object{
+    private var mWooCommerceService: WooCommerceService =
+            RetrofitInstance.registerCustomer().create(WooCommerceService::class.java)
+
+    //    companion object{
 //       private val sCustomerRepository : CustomerRepository by lazy{Holder.INSTANCE}
 //    }
 //
 //    private object Holder {
 //        val INSTANCE = CustomerRepository()
 //    }
-    fun postCustomer(customer: Customer){
-    val call = mWooCommerceService.registerCustomer(customer)
-        call.enqueue(object :Callback<Customer>{
+    fun postCustomer(customer: Customer) {
+        val call = mWooCommerceService.registerCustomer(customer)
+        call.enqueue(object : Callback<Customer> {
             override fun onResponse(call: Call<Customer>, response: Response<Customer>) {
-                if (response.isSuccessful){
+                if (response.isSuccessful) {
                     Log.d("CustomerRepository", "isSuccessful")
+                }else{
+                    Log.d("CustomerRepository", response.message())
                 }
+
             }
 
             override fun onFailure(call: Call<Customer>, t: Throwable) {
-                TODO("Not yet implemented")
-                Log.d("CustomerRepository", "!isSuccessful",t.cause)
+                Log.d("CustomerRepository", "!isSuccessful", t.cause)
             }
 
-        } )
+        })
     }
 }

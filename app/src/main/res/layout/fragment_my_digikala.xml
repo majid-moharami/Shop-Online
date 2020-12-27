@@ -39,12 +39,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_input_layout_title"
-            android:layout_width="0dp"
-            android:layout_height="66dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            style="@style/textInputLayout_my_digikala"
             android:background="@drawable/edit_text_back"
-            android:textColorHint="#4C4A4A"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -55,16 +51,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_text_persian"
-                android:layout_width="match_parent"
-                android:layout_height="59dp"
-                android:gravity="bottom"
+               style="@style/textInputEditText_my_digikala"
                 android:hint="پست الکترونیکی خود را وارد کنید"
-                android:inputType="text"
-                android:maxLines="1"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
-                android:textColor="#000000"
-                android:textColorLink="#F5001D" />
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

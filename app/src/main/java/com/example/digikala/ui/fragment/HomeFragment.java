@@ -146,12 +146,11 @@ public class HomeFragment extends Fragment {
                 mHomeBinding.productRoot.setVisibility(View.VISIBLE);
                 mHomeBinding.progressBarLoadingFragment.setVisibility(View.GONE);
                 CustomerRepository customerRepository = CustomerRepository.INSTANCE;
-                customerRepository.postCustomer(new Customer("majid","majj","moharami",
-                        "fcr7m",new Billing("dcvsc","dcvsc","dcvsc","dcvsc","dcvsc",
-                        "dcvsc","dcvsc","dcvsc","dcvsc","dcvsc","dcvsc"),new Shipping(
-                        "dcvsc","dcvsc","dcvsc","dcvsc",
-                        "dcvsc","dcvsc","dcvsc","dcvsc","dcvsc"
-                )));
+                Shipping sh = new Shipping("majid","moharami","scs",
+                        "iran","tehran","varamin","12344");
+                Customer customer = new Customer("majid11111@gmail.com","majid",
+                        "moharami",sh);
+                customerRepository.postCustomer(customer);
                 mNeedToLoad=false;
                 mRecentViewModel.setFragmentState(State.LOADING);
             }

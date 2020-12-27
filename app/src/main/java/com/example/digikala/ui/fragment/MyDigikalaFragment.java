@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,9 @@ public class MyDigikalaFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_digikala, container, false);
+        mBinding.button.setOnClickListener(v -> {
+           // Navigation.findNavController(mBinding.getRoot()).navigate( MyDigikalaFragmentDirections.actionNavMyDigikalaFragmentToPersonalInfoFragment());
+        });
         return mBinding.getRoot();
     }
 }

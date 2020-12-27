@@ -28,4 +28,25 @@
         <item name="android:text">@string/see_more</item>
     </style>
 
+    <style name="textInputLayout_my_digikala">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">66dp</item>
+        <item name="android:textColorHint">#4C4A4A</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+    </style>
+
+    <style name="textInputEditText_my_digikala">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">59dp</item>
+        <item name="android:gravity">bottom</item>
+        <item name="android:inputType">text</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:textColor">#000000</item>
+        <item name="android:textColorLink">#F5001D</item>
+
+    </style>
+
 </resources>
