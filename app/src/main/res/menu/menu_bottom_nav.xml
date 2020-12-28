@@ -22,7 +22,7 @@
         android:title="@string/shop_basket" />
 
     <item
-        android:id="@+id/nav_myDigikalaFragment"
+        android:id="@+id/choosingCustomerFragment"
         android:icon="@drawable/my_digikala_selector"
         android:title="@string/my_digikala"
         />

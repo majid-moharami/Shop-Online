@@ -5,22 +5,30 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.example.digikala.R
+import com.example.digikala.databinding.FragmentUserInfoBinding
+import com.example.digikala.viewmodel.CustomerViewModel
 
 class UserInfoFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+
+    private lateinit var mViewModel : CustomerViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        mViewModel = ViewModelProvider(this).get(CustomerViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_info, container, false)
+        var binding = FragmentUserInfoBinding.inflate(inflater, container, false)
+        var c = mViewModel.getCustomers()?.get(0)
+        if (c != null) {
+            binding.textViewUsetName.text = c.mFistName+" "+ c.mLastName
+            binding.textViewUserEmail.text = c.mEmail
+        }
+        return binding.root
     }
 
     companion object {

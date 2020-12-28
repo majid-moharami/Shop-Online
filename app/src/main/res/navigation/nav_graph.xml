@@ -36,7 +36,7 @@
         tools:layout="@layout/fragment_basket" >
     </fragment>
     <fragment
-        android:id="@+id/nav_myDigikalaFragment1"
+        android:id="@+id/nav_myDigikalaFragment"
         android:name="com.example.digikala.ui.fragment.MyDigikalaFragment"
         tools:layout="@layout/fragment_my_digikala">
 
@@ -92,19 +92,9 @@
         <action
             android:id="@+id/action_personalInfoFragment_to_shippingInfoFragment"
             app:destination="@id/shippingInfoFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/nav_myDigikalaFragment"
-        android:name="com.example.digikala.ui.fragment.LoadUserFragment"
-        android:label="fragment_my_digikala"
-        tools:layout="@layout/fragment_load_user">
-        <action
-            android:id="@+id/action_loadUserFragment_to_userInfoFragment"
-            app:destination="@id/userInfoFragment" />
-
-        <action
-            android:id="@+id/action_nav_myDigikalaFragment_to_nav_myDigikalaFragment1"
-            app:destination="@id/nav_myDigikalaFragment1" />
+        <argument
+            android:name="email"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/userInfoFragment"
@@ -117,6 +107,26 @@
         <action
             android:id="@+id/action_shippingInfoFragment_to_userInfoFragment"
             app:destination="@id/userInfoFragment" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="first_name"
+            app:argType="string" />
+        <argument
+            android:name="last_name"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/choosingCustomerFragment"
+        android:name="com.example.digikala.ui.fragment.ChoosingCustomerFragment"
+        android:label="ChoosingCustomerFragment" >
+        <action
+            android:id="@+id/action_choosingCustomerFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
+        <action
+            android:id="@+id/action_choosingCustomerFragment_to_nav_myDigikalaFragment"
+            app:destination="@id/nav_myDigikalaFragment" />
     </fragment>
 
 </navigation>

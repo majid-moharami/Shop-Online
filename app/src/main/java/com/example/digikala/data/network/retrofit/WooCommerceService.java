@@ -41,4 +41,7 @@ public interface WooCommerceService {
 
     @POST(RequestParams.CUSTOMER_CREATE_PATH)
     Call<Customer> registerCustomer(@Body Customer customer);
+
+    @GET(RequestParams.CUSTOMER_CREATE_PATH)
+    Call<List<Customer>> getCustomerByEmail(@Query("email") String email);
 }

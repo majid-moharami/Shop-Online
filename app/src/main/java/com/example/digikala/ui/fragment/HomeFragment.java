@@ -146,6 +146,7 @@ public class HomeFragment extends Fragment {
                 mHomeBinding.productRoot.setVisibility(View.VISIBLE);
                 mHomeBinding.progressBarLoadingFragment.setVisibility(View.GONE);
                 CustomerRepository customerRepository = CustomerRepository.INSTANCE;
+
                 Shipping sh = new Shipping("majid","moharami","scs",
                         "iran","tehran","varamin","12344");
                 Customer customer = new Customer("majid11111@gmail.com","majid",
