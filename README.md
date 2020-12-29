@@ -19,6 +19,8 @@ This is a shop online app similar digikala.
    - NavigationComponent
    - search product
    - Cart product and save in Room Database.
+   - Creating costomer
+   - post costomer to api
   
 2.Libraries Used
    - Retrofit
@@ -29,8 +31,6 @@ This is a shop online app similar digikala.
   
   
 # Soon (In the next two weeks)
-     - Creating costomer
-     - post costomer to api
      - using map to get costomer address
      - using WorkManger for send notification to user
     
