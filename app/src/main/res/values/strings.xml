@@ -36,4 +36,5 @@
     <string name="state">استان</string>
     <string name="address_one">آدرس اول</string>
     <string name="post_code">کد پستی</string>
+    <string name="off">خاموش</string>
 </resources>

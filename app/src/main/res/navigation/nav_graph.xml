@@ -99,7 +99,11 @@
     <fragment
         android:id="@+id/userInfoFragment"
         android:name="com.example.digikala.ui.fragment.UserInfoFragment"
-        android:label="UserInfoFragment" />
+        android:label="UserInfoFragment" >
+        <action
+            android:id="@+id/action_userInfoFragment_to_notificationSettingFragment"
+            app:destination="@id/notificationSettingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/shippingInfoFragment"
         android:name="com.example.digikala.ui.fragment.ShippingInfoFragment"
@@ -128,5 +132,9 @@
             android:id="@+id/action_choosingCustomerFragment_to_nav_myDigikalaFragment"
             app:destination="@id/nav_myDigikalaFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/notificationSettingFragment"
+        android:name="com.example.digikala.ui.fragment.NotificationSettingFragment"
+        android:label="NotificationSettingFragment" />
 
 </navigation>
