@@ -33,6 +33,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
     def work_version = "2.4.0"
     def nav_version = "2.3.1"
     def room_version = "2.2.5"
@@ -83,4 +84,6 @@ dependencies {
     //work manager
     implementation "androidx.work:work-runtime-ktx:$work_version"
 
+    //google map
+    implementation 'com.google.maps.android:android-maps-utils:2.2.0'
 }

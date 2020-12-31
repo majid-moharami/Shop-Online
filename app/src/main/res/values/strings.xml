@@ -37,4 +37,5 @@
     <string name="address_one">آدرس اول</string>
     <string name="post_code">کد پستی</string>
     <string name="off">خاموش</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyAdfE8An_g7e4bMMVd0ToVIKH2laZedI2o</string>
 </resources>

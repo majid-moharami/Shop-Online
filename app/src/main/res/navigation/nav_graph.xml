@@ -120,6 +120,9 @@
         <argument
             android:name="last_name"
             app:argType="string" />
+        <action
+            android:id="@+id/action_shippingInfoFragment_to_mapFragment"
+            app:destination="@id/mapFragment" />
     </fragment>
     <fragment
         android:id="@+id/choosingCustomerFragment"
@@ -136,5 +139,9 @@
         android:id="@+id/notificationSettingFragment"
         android:name="com.example.digikala.ui.fragment.NotificationSettingFragment"
         android:label="NotificationSettingFragment" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.example.digikala.ui.fragment.MapFragment"
+        android:label="MapFragment" />
 
 </navigation>

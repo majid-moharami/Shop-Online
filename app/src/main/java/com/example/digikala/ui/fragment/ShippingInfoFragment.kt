@@ -55,6 +55,11 @@ class ShippingInfoFragment : Fragment() {
                 mViewModel.postCustomer(customer)
             }
         }
+
+        binding.buttonMap.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                    .navigate(ShippingInfoFragmentDirections.actionShippingInfoFragmentToMapFragment())
+        }
         return binding.root
     }
 
