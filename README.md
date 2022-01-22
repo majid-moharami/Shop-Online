@@ -30,8 +30,6 @@ This is a shop online app similar digikala.
    - Slider
   
   
-# Soon (In the next two weeks)
-     - using map to get costomer address
-     - using WorkManger for send notification to user
+
     
   
